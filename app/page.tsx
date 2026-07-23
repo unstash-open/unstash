@@ -1,0 +1,299 @@
+import Link from "next/link";
+import { DonationPanel } from "./components/DonationPanel";
+import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
+
+const milestones = [
+  {
+    amount: "0—2K",
+    title: "Private vault",
+    copy: "Polish the local-first prototype, add reliable import/export and ship the public source.",
+  },
+  {
+    amount: "2—5K",
+    title: "One-click import",
+    copy: "Build the browser extension and a permission-light Reddit OAuth importer.",
+  },
+  {
+    amount: "5—8K",
+    title: "Useful resurfacing",
+    copy: "Add on-device search, summaries and a daily queue without selling or training on user data.",
+  },
+  {
+    amount: "8—10K",
+    title: "Ready for everyone",
+    copy: "Cross-browser QA, accessibility review, documentation and a stable v1 release.",
+  },
+];
+
+const principles = [
+  ["Local first", "Your links and notes stay in your browser in the current prototype."],
+  ["No subscription trap", "The core product remains free and open source."],
+  ["No donor advantage", "Contributions buy no equity, token, governance or financial return."],
+  ["Public ledger", "The campaign wallet, cutoff date, incoming transfers and budget are visible."],
+];
+
+export default function Home() {
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <section className="hero shell">
+          <div className="hero-copy">
+            <div className="eyebrow">
+              <span className="live-dot" aria-hidden="true" />
+              Public build · voluntary funding
+            </div>
+            <h1>
+              Saved
+              <br />
+              <span>≠ used.</span>
+            </h1>
+            <p className="hero-lead">
+              Unstash turns forgotten saved posts into a private, searchable
+              queue of things you will actually read, try and remember.
+            </p>
+            <div className="hero-actions">
+              <Link className="button button-dark" href="/prototype">
+                Try the working prototype
+                <span aria-hidden="true">↗</span>
+              </Link>
+              <a className="button button-ghost" href="#fund">
+                See the $10K roadmap
+              </a>
+            </div>
+            <p className="microcopy">
+              No account. No tracking. Prototype data stays on this device.
+            </p>
+          </div>
+
+          <div className="hero-product" aria-label="Preview of the Unstash workflow">
+            <div className="product-window">
+              <div className="window-bar">
+                <div className="brand-chip">
+                  <span className="brand-mark">U</span>
+                  <span>unstash</span>
+                </div>
+                <span className="window-state">3 ready</span>
+              </div>
+              <div className="queue-heading">
+                <div>
+                  <small>YOUR QUEUE</small>
+                  <h2>Make one save useful.</h2>
+                </div>
+                <span className="date-chip">Today</span>
+              </div>
+              <article className="saved-card card-yellow">
+                <div className="saved-meta">
+                  <span>r/learnprogramming</span>
+                  <span>8 min</span>
+                </div>
+                <h3>A practical guide I saved three weeks ago</h3>
+                <div className="next-action">
+                  <span>Next action</span>
+                  <strong>Try the first exercise</strong>
+                  <span aria-hidden="true">→</span>
+                </div>
+              </article>
+              <div className="mini-card-row">
+                <article className="mini-card">
+                  <span className="mini-tag blue">READ</span>
+                  <strong>Design systems that scale</strong>
+                  <small>Tomorrow · 12 min</small>
+                </article>
+                <article className="mini-card">
+                  <span className="mini-tag coral">MAKE</span>
+                  <strong>A tiny weekend project</strong>
+                  <small>Saturday · 40 min</small>
+                </article>
+              </div>
+            </div>
+            <div className="floating-note note-one">private by default</div>
+            <div className="floating-note note-two">save → act</div>
+          </div>
+        </section>
+
+        <section className="ticker" aria-label="Project principles">
+          <div className="ticker-track">
+            <span>OPEN SOURCE</span><i>✦</i>
+            <span>LOCAL FIRST</span><i>✦</i>
+            <span>NO ADS</span><i>✦</i>
+            <span>NO SUBSCRIPTION TRAP</span><i>✦</i>
+            <span>PUBLIC FUNDING LEDGER</span><i>✦</i>
+          </div>
+        </section>
+
+        <section className="problem-section shell" id="project">
+          <div className="section-kicker">01 · THE PROBLEM</div>
+          <div className="problem-grid">
+            <h2>The internet&apos;s quiet junk drawer.</h2>
+            <div className="problem-copy">
+              <p>
+                Saving feels productive. Then the post disappears into a list
+                with no context, no next step and no reason to return.
+              </p>
+              <div className="loop-diagram" aria-label="The current saved-post loop">
+                <span>SAVE</span><b>→</b><span>FORGET</span><b>→</b><span>REPEAT</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="workflow-section">
+          <div className="shell">
+            <div className="section-heading">
+              <div>
+                <div className="section-kicker">02 · THE PRODUCT</div>
+                <h2>A small loop that closes.</h2>
+              </div>
+              <p>
+                Unstash adds the one thing bookmarks are missing: an intended
+                action and a moment to resurface it.
+              </p>
+            </div>
+
+            <div className="workflow-grid">
+              <article className="workflow-card">
+                <span className="step-number">1</span>
+                <div className="workflow-visual import-visual">
+                  <div className="tiny-save">reddit.com/r/…</div>
+                  <div className="cursor-arrow">↘</div>
+                  <div className="unstash-box">UNSTASH</div>
+                </div>
+                <h3>Bring it in</h3>
+                <p>Paste a link today. One-click import arrives at milestone two.</p>
+              </article>
+              <article className="workflow-card featured">
+                <span className="step-number">2</span>
+                <div className="workflow-visual action-visual">
+                  <span>What will you do?</span>
+                  <strong>Try the checklist</strong>
+                  <div className="action-options">
+                    <i>READ</i><i>MAKE</i><i>KEEP</i>
+                  </div>
+                </div>
+                <h3>Name the action</h3>
+                <p>Turn “someday” into one useful, concrete next step.</p>
+              </article>
+              <article className="workflow-card">
+                <span className="step-number">3</span>
+                <div className="workflow-visual resurface-visual">
+                  <div className="sun">✦</div>
+                  <strong>Ready for today</strong>
+                  <span>8 minutes · Read</span>
+                </div>
+                <h3>See it again</h3>
+                <p>A calm daily queue resurfaces the right save at the right time.</p>
+              </article>
+            </div>
+
+            <div className="prototype-callout">
+              <div>
+                <span className="status-pill">WORKS NOW</span>
+                <h3>The local prototype is live.</h3>
+                <p>
+                  Add links, choose an action, search your queue and export it.
+                  Everything is stored only in your browser.
+                </p>
+              </div>
+              <Link className="button button-light" href="/prototype">
+                Open prototype <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="funding-section shell" id="fund">
+          <div className="funding-intro">
+            <div className="section-kicker">03 · THE FUND</div>
+            <h2>Help ship the version your saves deserve.</h2>
+            <p>
+              The target is 10,000 USDT. Contributions are voluntary and fund
+              development time plus the published project costs—nothing more is
+              promised in return.
+            </p>
+          </div>
+
+          <div className="funding-layout">
+            <DonationPanel />
+            <div className="milestones">
+              {milestones.map((milestone) => (
+                <article className="milestone" key={milestone.amount}>
+                  <span>{milestone.amount} USDT</span>
+                  <div>
+                    <h3>{milestone.title}</h3>
+                    <p>{milestone.copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="principles-section">
+          <div className="shell">
+            <div className="section-heading inverse">
+              <div>
+                <div className="section-kicker">04 · THE PROMISE</div>
+                <h2>Trust is a feature.</h2>
+              </div>
+              <Link className="text-link light-link" href="/transparency">
+                Read the full funding policy <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="principles-grid">
+              {principles.map(([title, copy], index) => (
+                <article key={title}>
+                  <span>0{index + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="faq-section shell" id="faq">
+          <div className="section-kicker">05 · STRAIGHT ANSWERS</div>
+          <div className="faq-layout">
+            <h2>Before you contribute.</h2>
+            <div className="faq-list">
+              <details>
+                <summary>Is this a charity or an investment?</summary>
+                <p>
+                  Neither. It is voluntary crowdfunding for an independently
+                  operated open-source software project. Contributions are not
+                  tax-deductible and provide no ownership, token, profit or return.
+                </p>
+              </details>
+              <details>
+                <summary>Where does the money go?</summary>
+                <p>
+                  To development time, design and accessibility work, testing,
+                  infrastructure and documentation according to the public budget.
+                  Any material change will be posted before funds are reassigned.
+                </p>
+              </details>
+              <details>
+                <summary>What if the target is not reached?</summary>
+                <p>
+                  Work ships milestone by milestone. Reaching a threshold funds
+                  that scope; the live prototype and published source remain
+                  available even if the full 10,000 USDT is not raised.
+                </p>
+              </details>
+              <details>
+                <summary>Can I help without sending money?</summary>
+                <p>
+                  Yes. Test the prototype, report bugs, improve documentation or
+                  share thoughtful feedback. Those contributions are just as real.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}
