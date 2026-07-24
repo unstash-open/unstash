@@ -7,7 +7,9 @@ tracking and no remote database.
 Live project: **https://unstash-open.vercel.app**
 
 The project is being built in public through a voluntary 10,000 USDT campaign.
-Read [FUNDING.md](./FUNDING.md) before contributing.
+Read [FUNDING.md](./FUNDING.md) before contributing. Launch ops and Plan B
+channels: [docs/OPERATIONS.md](./docs/OPERATIONS.md),
+[docs/CHANNEL_LAUNCH.md](./docs/CHANNEL_LAUNCH.md).
 
 ## What works today
 
