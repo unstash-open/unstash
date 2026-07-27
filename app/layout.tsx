@@ -29,13 +29,28 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s · Unstash",
     },
     description:
-      "A private, local-first knowledge queue for saved posts—built in public and voluntarily funded.",
+      "A private, local-first queue that turns saved links into clear next steps.",
     applicationName: "Unstash",
+    keywords: [
+      "bookmark manager",
+      "local-first",
+      "saved links",
+      "personal knowledge management",
+      "productivity",
+      "open source",
+    ],
+    alternates: {
+      canonical: origin,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       type: "website",
       title: "Saved ≠ used. Unstash fixes the loop.",
       description:
-        "Try the private prototype and follow the transparent 10,000 USDT open-source roadmap.",
+        "Turn saved links into a private queue of things you will actually read, make and keep.",
       url: origin,
       siteName: "Unstash",
       images: [

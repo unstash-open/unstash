@@ -3,14 +3,64 @@ import { SiteHeader } from "../components/SiteHeader";
 import { VaultPrototype } from "./vault-prototype";
 
 export const metadata: Metadata = {
-  title: "Private prototype",
+  title: "Try the local-first prototype",
   description:
-    "Try the local-first Unstash prototype. Your links stay in this browser.",
+    "Add a link, choose Read, Make or Keep, and export your private queue to Markdown. No account or tracking.",
+  alternates: {
+    canonical: "/prototype",
+  },
+  openGraph: {
+    type: "website",
+    title: "Unstash — turn saved links into next steps",
+    description:
+      "Try the local-first queue for links you meant to use. No account, no tracking, and data stays in your browser.",
+    url: "/prototype",
+    siteName: "Unstash",
+    images: [
+      {
+        url: "/og.png",
+        width: 1536,
+        height: 1024,
+        alt: "Unstash — saved does not mean used",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Unstash — turn saved links into next steps",
+    description:
+      "A private, local-first queue for the links you meant to use.",
+    images: ["/og.png"],
+  },
 };
 
 export default function PrototypePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Unstash",
+    applicationCategory: "ProductivityApplication",
+    operatingSystem: "Any modern web browser",
+    isAccessibleForFree: true,
+    description:
+      "A private, local-first queue that turns saved links into clear next steps.",
+    featureList: [
+      "Read, Make and Keep action labels",
+      "Local browser storage",
+      "Queue search and completion",
+      "Markdown export",
+      "No account or tracking",
+    ],
+    url: "https://unstash-open.vercel.app/prototype",
+    codeRepository: "https://github.com/unstash-open/unstash",
+  };
+
   return (
     <div className="prototype-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <SiteHeader />
       <main className="prototype-shell shell">
         <section className="page-hero">
