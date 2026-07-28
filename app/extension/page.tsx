@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PROJECT } from "../../lib/project";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 
@@ -48,9 +49,37 @@ const privacyFacts = [
   ["No URL upload", "Capture data travels in a URL fragment, which is cleared after import."],
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Unstash Capture",
+  description:
+    "A permission-light Chromium extension that sends the active tab to a private local-first action queue.",
+  applicationCategory: "BrowserApplication",
+  operatingSystem: "Chrome, Brave, Edge",
+  softwareVersion: "0.1.0",
+  isAccessibleForFree: true,
+  downloadUrl: `${PROJECT.siteUrl}/unstash-extension-v0.1.0.zip`,
+  installUrl: `${PROJECT.siteUrl}/extension`,
+  codeRepository: `${PROJECT.sourceUrl}/tree/main/extension`,
+  releaseNotes: PROJECT.releaseUrl,
+  permissions: "activeTab",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+};
+
 export default function ExtensionPage() {
   return (
     <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
       <SiteHeader />
       <main className="extension-main">
         <section className="extension-hero shell">
@@ -164,14 +193,24 @@ export default function ExtensionPage() {
                 documentation.
               </p>
             </div>
-            <a
-              className="text-link"
-              href="https://github.com/unstash-open/unstash/tree/main/extension"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Inspect extension source <span aria-hidden="true">↗</span>
-            </a>
+            <div className="extension-release-links">
+              <a
+                className="text-link"
+                href={PROJECT.releaseUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Open official release <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                className="text-link"
+                href={`${PROJECT.sourceUrl}/tree/main/extension`}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Inspect extension source <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
         </section>
       </main>

@@ -1961,6 +1961,14 @@ summary {
   line-height: 1.55;
 }
 
+.extension-release-links {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .extension-limit .text-link {
   flex: 0 0 auto;
 }
@@ -2339,6 +2347,10 @@ summary {
     padding: 23px;
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .extension-release-links {
+    align-items: flex-start;
   }
 
   .reddit-import {

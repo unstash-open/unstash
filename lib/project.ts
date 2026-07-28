@@ -1,5 +1,7 @@
 export const PROJECT = {
   name: "Unstash",
+  siteUrl: "https://unstash-open.vercel.app",
+  releaseUrl: "https://github.com/unstash-open/unstash/releases/tag/v0.1.0",
   goalUsdt: 10_000,
   activeMilestone: {
     id: "extension-hardening",

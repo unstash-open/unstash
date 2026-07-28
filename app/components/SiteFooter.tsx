@@ -17,6 +17,9 @@ export function SiteFooter() {
         <div className="footer-links">
           <Link href="/prototype">Prototype</Link>
           <Link href="/extension">Extension 0.1</Link>
+          <a href={PROJECT.releaseUrl} target="_blank" rel="noreferrer">
+            Release ↗
+          </a>
           <Link href="/transparency">Funding policy</Link>
           <a href={PROJECT.sourceUrl} target="_blank" rel="noreferrer">
             Source code ↗
