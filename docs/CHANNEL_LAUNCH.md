@@ -29,12 +29,14 @@ save something: what will you actually do with it — read, make, or keep?
 Current build:
 
 - add any URL with a Read / Make / Keep action;
+- capture the active tab with the installable Chromium preview;
 - search and complete items;
 - export the queue as Markdown;
 - store everything in local storage (no account, no remote vault).
 
 The current build also imports Reddit's official saved-post CSV locally. Not
-built yet: live-save browser extension, on-device summaries and resurfacing.
+built yet: Firefox packaging, automated browser tests, on-device summaries and
+resurfacing.
 
 Live prototype: https://unstash-open.vercel.app/prototype
 
@@ -62,12 +64,14 @@ concrete next step.
 What ships today:
 
 - private in-browser queue;
+- one-click active-tab capture in the Chromium developer preview;
 - Read / Make / Keep labels;
 - search + completion;
 - Markdown export.
 
-What shipped: local import of Reddit's official saved-post CSV with no account
-access or upload. What is next: a permission-light live-save extension.
+What shipped: local Reddit CSV import plus extension 0.1 with only `activeTab`
+and no host permissions. What is next: Firefox packaging, automated browser
+tests and store-ready release notes.
 
 The active milestone has a transparent 500 USDT budget and public on-chain
 total. The broader 10,000 USDT roadmap is a stretch plan. Contributions buy
@@ -96,7 +100,7 @@ Saved ≠ used: a local-first queue for links you meant to act on
 3. Why local-first for v0 (privacy, no account tax, portable Markdown).
 4. What works / what does not (honest list).
 5. How the public USDT ledger funds remaining work without selling user data.
-6. Ask for feedback on data model before extension work.
+6. Ask whether `activeTab` is acceptable or users prefer CSV-only import.
 
 End with prototype + source links. Keep the funding section under ~15% of the
 article length.
@@ -105,10 +109,11 @@ article length.
 
 Saved posts ≠ used posts.
 
-Unstash: paste a link, pick Read / Make / Keep, search the queue, export
-Markdown. Runs in your browser. No account.
+Unstash: capture one tab, pick Read / Make / Keep, search the queue, export
+Markdown. Extension 0.1 uses activeTab only. No account.
 
-Try: https://unstash-open.vercel.app  
+Try: https://unstash-open.vercel.app/extension
+
 Source: https://github.com/unstash-open/unstash
 
 ## Product Hunt (when source + demo are ready)
@@ -119,9 +124,9 @@ Local-first queue that turns saved links into next steps
 
 **Description (first paragraph)**
 
-Unstash helps you stop burying useful posts. Add a link, choose Read / Make /
-Keep, search your queue and export Markdown. Data stays on your device in the
-current prototype.
+Unstash helps you stop burying useful posts. Capture a tab, choose Read / Make /
+Keep, search your queue and export Markdown. Extension 0.1 and the prototype
+keep the queue on your device.
 
 Mention the voluntary funding page only in Maker comment / links, not in the
 first screenshot captions.

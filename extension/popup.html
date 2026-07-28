@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Save to Unstash</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <div>
+          <strong>unstash</strong>
+          <small>capture 0.1</small>
+        </div>
+      </header>
+
+      <section class="tab-preview" aria-labelledby="tab-title">
+        <span class="eyebrow">CURRENT TAB</span>
+        <h1 id="tab-title">Reading this tab…</h1>
+        <p id="tab-url"></p>
+      </section>
+
+      <label for="capture-action">What happens next?</label>
+      <select id="capture-action">
+        <option value="read">Read</option>
+        <option value="make">Make</option>
+        <option value="keep">Keep</option>
+      </select>
+
+      <button id="capture-button" type="button" disabled>
+        Add to my private queue
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <p id="status" role="status">
+        Only this tab is read when you click the extension.
+      </p>
+      <p class="privacy">
+        No host access · no account · no remote vault
+      </p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -9,6 +9,7 @@
 - [x] Record the UTC launch cutoff: 2026-07-23 14:26:45 UTC.
 - [x] Publish the source repository and funding policy.
 - [x] Test the prototype on desktop and mobile (build/tests + live page smoke).
+- [x] Ship Chromium extension developer preview 0.1 with activeTab only.
 - [ ] Ask target subreddit moderators where fundraising rules are unclear.
       (Plan B channels proceed without waiting; see below.)
 
@@ -47,7 +48,7 @@ Rules for every channel:
 
 ### Conversion order
 
-1. Let the visitor try the working importer without an account.
+1. Let the visitor try the working importer or install extension 0.1.
 2. Ask for one useful signal: feedback, a GitHub issue or a star.
 3. Show optional funding only after the visitor has seen the product work.
 
@@ -57,9 +58,9 @@ donations, votes or usage numbers.
 
 ### Funding rails
 
-- Permission-free Reddit CSV import shipped before funding. The active target
-  is 500 USDT for extension hardening; 10,000 USDT is the broader stretch
-  roadmap.
+- Permission-free Reddit CSV import and extension 0.1 shipped before funding.
+  The active target is 500 USDT for cross-browser hardening; 10,000 USDT is the
+  broader stretch roadmap.
 - Source of truth remains the public TRC20 and ERC20 campaign wallets and the
   on-chain accounting rule in FUNDING.md.
 - Optional fiat doors (GitHub Sponsors, Ko-fi, Liberapay, Open Collective) may
@@ -69,9 +70,9 @@ donations, votes or usage numbers.
 
 ### Product cadence while waiting
 
-1. Harden the permission-light extension (active 500 USDT milestone).
+1. Harden extension 0.1 for Firefox, automated tests and store packaging.
 2. Post a weekly update (template below) even if incoming USDT is zero.
-3. Keep a 30–45s demo of paste → action → Markdown export ready to attach.
+3. Keep short demos of extension capture and CSV import ready to attach.
 
 ## Weekly update template
 

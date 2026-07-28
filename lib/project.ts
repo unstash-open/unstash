@@ -2,11 +2,11 @@ export const PROJECT = {
   name: "Unstash",
   goalUsdt: 10_000,
   activeMilestone: {
-    id: "reddit-import",
-    title: "Reddit extension hardening",
+    id: "extension-hardening",
+    title: "Extension 0.1 hardening",
     goalUsdt: 500,
     deliveryTarget:
-      "CSV import is live. A permission-light extension prototype ships within 7 days after the milestone is funded.",
+      "The Chromium developer preview is live. A tested cross-browser release ships within 7 days after the milestone is funded.",
   },
   suggestedContributions: [10, 25, 100],
   launchAt: "2026-07-23T14:26:45.000Z",

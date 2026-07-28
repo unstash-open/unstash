@@ -25,11 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(origin),
     title: {
-      default: "Unstash — local Reddit import is live",
+      default: "Unstash — turn saved links into next steps",
       template: "%s · Unstash",
     },
     description:
-      "Import Reddit saves into a private, local-first action queue without login, OAuth or upload.",
+      "Capture a tab or import Reddit saves into a private local-first action queue without an account or remote vault.",
     applicationName: "Unstash",
     keywords: [
       "bookmark manager",
@@ -48,26 +48,26 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       type: "website",
-      title: "Reddit import is live — private, local and open source",
+      title: "Unstash Capture 0.1 — one permission, private by default",
       description:
-        "Import Reddit's official saved-post CSV locally. No login, OAuth token or upload.",
+        "Capture the active tab or import Reddit CSV files into a private local queue.",
       url: origin,
       siteName: "Unstash",
       images: [
         {
-          url: `${origin}/og-reddit-import.png`,
+          url: `${origin}/og-extension.png`,
           width: 1536,
           height: 1024,
-          alt: "Unstash — Reddit import is live, private and local-first",
+          alt: "Unstash Capture 0.1 — save the tab and pick what happens next",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Reddit import is live — private, local and open source",
+      title: "Unstash Capture 0.1",
       description:
-        "Import Reddit saves locally without login, OAuth or upload.",
-      images: [`${origin}/og-reddit-import.png`],
+        "Save the active tab with one permission and no remote vault.",
+      images: [`${origin}/og-extension.png`],
     },
   };
 }

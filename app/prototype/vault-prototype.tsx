@@ -12,6 +12,11 @@ import {
   normaliseRedditUrl,
   parseRedditExportCsv,
 } from "../../lib/reddit-import";
+import {
+  CAPTURE_HASH_PREFIX,
+  decodeCaptureHash,
+  normaliseCaptureUrl,
+} from "../../extension/capture";
 
 type ActionType = "read" | "make" | "keep";
 
@@ -25,6 +30,7 @@ type VaultItem = {
 };
 
 const STORAGE_KEY = "unstash-prototype-v1";
+const actions = new Set<ActionType>(["read", "make", "keep"]);
 
 const examples: VaultItem[] = [
   {
@@ -61,6 +67,21 @@ function deriveTitle(value: string) {
   }
 }
 
+function isVaultItem(value: unknown): value is VaultItem {
+  if (!value || typeof value !== "object") return false;
+  const item = value as Partial<VaultItem>;
+
+  return (
+    typeof item.id === "string" &&
+    typeof item.url === "string" &&
+    typeof item.title === "string" &&
+    typeof item.action === "string" &&
+    actions.has(item.action as ActionType) &&
+    typeof item.createdAt === "string" &&
+    typeof item.completed === "boolean"
+  );
+}
+
 export function VaultPrototype() {
   const [items, setItems] = useState<VaultItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
@@ -70,19 +91,63 @@ export function VaultPrototype() {
   const [importAction, setImportAction] = useState<ActionType>("read");
   const [importMessage, setImportMessage] = useState("");
   const [didImport, setDidImport] = useState(false);
+  const [captureMessage, setCaptureMessage] = useState("");
+  const [didCapture, setDidCapture] = useState(false);
   const [query, setQuery] = useState("");
   const [didExport, setDidExport] = useState(false);
 
   useEffect(() => {
     const loadTimer = window.setTimeout(() => {
+      let loadedItems: VaultItem[] = [];
+
       try {
         const saved = window.localStorage.getItem(STORAGE_KEY);
-        if (saved) setItems(JSON.parse(saved) as VaultItem[]);
+        const parsed = saved ? JSON.parse(saved) : [];
+        if (Array.isArray(parsed)) loadedItems = parsed.filter(isVaultItem);
       } catch {
-        setItems([]);
-      } finally {
-        setHydrated(true);
+        loadedItems = [];
       }
+
+      if (window.location.hash.startsWith(CAPTURE_HASH_PREFIX)) {
+        const result = decodeCaptureHash(window.location.hash);
+        window.history.replaceState(
+          null,
+          "",
+          `${window.location.pathname}${window.location.search}`,
+        );
+
+        if (result.ok) {
+          const capturedUrl = normaliseCaptureUrl(result.capture.url);
+          const duplicate = loadedItems.some(
+            (item) => normaliseCaptureUrl(item.url) === capturedUrl,
+          );
+
+          if (duplicate) {
+            setCaptureMessage("That tab is already in your local queue.");
+          } else {
+            loadedItems = [
+              {
+                id: `extension-${crypto.randomUUID()}`,
+                url: result.capture.url,
+                title: result.capture.title,
+                action: result.capture.action,
+                createdAt: new Date().toISOString(),
+                completed: false,
+              },
+              ...loadedItems,
+            ];
+            setCaptureMessage(
+              `Captured locally · ${result.capture.action.toUpperCase()} · ${result.capture.title}`,
+            );
+          }
+          setDidCapture(true);
+        } else {
+          setCaptureMessage(`Capture could not be imported: ${result.error}`);
+        }
+      }
+
+      setItems(loadedItems);
+      setHydrated(true);
     }, 0);
 
     return () => window.clearTimeout(loadTimer);
@@ -213,6 +278,7 @@ export function VaultPrototype() {
   };
 
   const showSupport =
+    didCapture ||
     didImport ||
     didExport ||
     items.length >= 3 ||
@@ -220,6 +286,15 @@ export function VaultPrototype() {
 
   return (
     <>
+      {captureMessage ? (
+        <div className="capture-result" role="status">
+          <span className="status-pill">
+            {didCapture ? "EXTENSION CAPTURED" : "CAPTURE ERROR"}
+          </span>
+          <p>{captureMessage}</p>
+        </div>
+      ) : null}
+
       <section className="prototype-toolbar" aria-label="Add a saved link">
         <form className="add-form" onSubmit={addItem}>
           <div className="form-field">
@@ -448,17 +523,22 @@ export function VaultPrototype() {
       {showSupport ? (
         <aside className="prototype-support" aria-label="Support the next Unstash milestone">
           <div>
-            <span className="status-pill">YOU USED THE PROTOTYPE</span>
-            <h2>Want the browser extension next?</h2>
+            <span className="status-pill">EXTENSION 0.1 SHIPPED</span>
+            <h2>Capture the next tab in one click.</h2>
             <p>
-              Permission-free CSV import works now. The 500 USDT milestone
-              funds extension hardening, live-save capture and cross-browser
-              testing. Support is optional; your queue stays private either way.
+              The Chromium developer preview now captures the active tab with
+              one permission and no remote vault. The 500 USDT milestone funds
+              cross-browser hardening, automated tests and store-ready packaging.
             </p>
           </div>
-          <Link className="button button-dark" href="/#fund">
-            Fund extension hardening <span aria-hidden="true">→</span>
-          </Link>
+          <div className="prototype-support-actions">
+            <Link className="button button-dark" href="/extension">
+              Install extension 0.1 <span aria-hidden="true">→</span>
+            </Link>
+            <Link className="text-link" href="/#fund">
+              Optional funding
+            </Link>
+          </div>
         </aside>
       ) : null}
     </>

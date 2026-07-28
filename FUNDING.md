@@ -1,6 +1,6 @@
 # Unstash funding policy
 
-Active milestone: **500 USDT** for Reddit extension hardening
+Active milestone: **500 USDT** for extension 0.1 cross-browser hardening
 
 Stretch roadmap: **10,000 USDT**
 
@@ -35,8 +35,13 @@ official `saved_posts.csv` and `saved_comments.csv` files before receiving any
 campaign contribution. Files are parsed locally, duplicate links are skipped
 and no Reddit account or token is requested.
 
+On the same date, Unstash released Chromium extension developer preview 0.1.
+It captures the active tab using only the temporary `activeTab` permission,
+passes the capture through a URL fragment that is not sent in HTTP requests and
+stores the item in the existing local browser queue.
+
 The project absorbed that proof-of-concept work. The active milestone budget
-below applies to the extension and reliability work that remains.
+below applies to cross-browser hardening and release work that remains.
 
 ## Active milestone budget
 
@@ -44,16 +49,17 @@ The first 500 USDT funds one narrow, testable upgrade:
 
 | Use | USDT |
 | --- | ---: |
-| Extension and live-save capture | 220 |
-| Import reliability and recovery | 100 |
-| Permission and privacy documentation | 80 |
-| Cross-browser testing | 80 |
+| Cross-browser packaging | 150 |
+| Capture reliability and recovery | 110 |
+| Permission and privacy audit | 80 |
+| Automated browser testing | 90 |
+| Store release and documentation | 50 |
 | Buffer | 20 |
 | **Total** | **500** |
 
-Delivery target: publish a permission-light extension prototype within seven
-days after the active milestone is fully funded. This is a project target, not
-a purchase promise or financial return.
+Delivery target: turn the released Chromium developer preview into a tested
+cross-browser release within seven days after the active milestone is fully
+funded. This is a project target, not a purchase promise or financial return.
 
 ## Stretch roadmap budget
 

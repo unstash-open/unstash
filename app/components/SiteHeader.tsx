@@ -12,6 +12,7 @@ export function SiteHeader() {
           <Link href="/#project">Project</Link>
           <Link href="/transparency">Transparency</Link>
           <Link href="/prototype">Prototype</Link>
+          <Link href="/extension">Extension</Link>
           <Link className="nav-cta" href="/#fund">Fund the build</Link>
         </nav>
       </div>

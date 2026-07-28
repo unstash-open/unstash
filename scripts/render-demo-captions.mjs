@@ -21,10 +21,10 @@ const captions = [
     "Then export to Markdown.",
   ],
   [
-    "The CSV importer is live.",
-    "Next up: a lightweight browser extension.",
+    "The importer is live. And now,",
+    "the lightweight browser extension is too.",
   ],
-  ["Open source. Private by default.", "Ready when you are."],
+  ["One click. One permission.", "Private by default."],
 ];
 
 await fs.mkdir(outputDirectory, { recursive: true });

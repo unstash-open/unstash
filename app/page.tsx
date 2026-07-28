@@ -6,13 +6,13 @@ import { SiteHeader } from "./components/SiteHeader";
 const milestones = [
   {
     amount: "0—500",
-    title: "Extension hardening",
-    copy: "Turn the shipped local CSV importer into a permission-light extension with public permission notes and tests.",
+    title: "Extension 0.1 hardening",
+    copy: "Turn the shipped Chromium preview into a tested cross-browser release with public permission notes.",
   },
   {
     amount: "500—2K",
-    title: "Live-save capture",
-    copy: "Add reliable capture, cross-browser packaging and safer failure recovery without a remote vault.",
+    title: "Reliable live capture",
+    copy: "Add keyboard capture, richer metadata and safer failure recovery without a remote vault.",
   },
   {
     amount: "2—5K",
@@ -58,9 +58,9 @@ export default function Home() {
                 Try the working prototype
                 <span aria-hidden="true">↗</span>
               </Link>
-              <a className="button button-ghost" href="#fund">
-                Fund extension hardening
-              </a>
+              <Link className="button button-ghost" href="/extension">
+                Get extension 0.1
+              </Link>
             </div>
             <p className="microcopy">
               No account. No tracking. Prototype data stays on this device.
@@ -161,7 +161,7 @@ export default function Home() {
                   <div className="unstash-box">UNSTASH</div>
                 </div>
                 <h3>Bring it in</h3>
-                <p>Paste a link or import Reddit&apos;s saved-post CSV locally today.</p>
+                <p>Capture the active tab, paste a link or import Reddit&apos;s saved-post CSV.</p>
               </article>
               <article className="workflow-card featured">
                 <span className="step-number">2</span>
@@ -190,14 +190,15 @@ export default function Home() {
             <div className="prototype-callout">
               <div>
                 <span className="status-pill">WORKS NOW</span>
-                <h3>The local prototype is live.</h3>
+                <h3>The local prototype and extension are live.</h3>
                 <p>
                   Import Reddit CSV files, add links, choose an action, search
-                  your queue and export it. Everything stays in your browser.
+                  your queue and export it. Extension 0.1 adds active-tab
+                  capture with no host permissions.
                 </p>
               </div>
-              <Link className="button button-light" href="/prototype">
-                Open prototype <span aria-hidden="true">→</span>
+              <Link className="button button-light" href="/extension">
+                Install extension <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -208,11 +209,11 @@ export default function Home() {
             <div className="demo-copy">
               <div className="section-kicker">03 · THE PROOF</div>
               <span className="status-pill">AI-PRODUCED · REAL PRODUCT UI</span>
-              <h2>See the shipped importer in 29 seconds.</h2>
+              <h2>See the private workflow in 29 seconds.</h2>
               <p>
                 The graphics and voice are synthetic. The screens and workflow
-                are the real product: import a Reddit CSV, choose an action,
-                search the queue and finish a save.
+                are the real product: capture a tab or import Reddit CSV, choose
+                an action, search the queue and finish a save.
               </p>
               <Link className="button button-light" href="/prototype">
                 Try the importer <span aria-hidden="true">→</span>
@@ -245,10 +246,10 @@ export default function Home() {
             <div className="section-kicker">04 · THE FUND</div>
             <h2>Fund one useful upgrade.</h2>
             <p>
-              The permission-free CSV importer shipped before the first
-              contribution. The active 500 USDT target now hardens it into a
-              permission-light extension. The broader 10,000 USDT roadmap stays
-              public.
+              The permission-free CSV importer and Chromium extension preview
+              shipped before the first contribution. The active 500 USDT target
+              now funds cross-browser hardening and store-ready packaging. The
+              broader 10,000 USDT roadmap stays public.
             </p>
           </div>
 
@@ -256,17 +257,17 @@ export default function Home() {
             <DonationPanel />
             <div>
               <article className="active-milestone">
-                <span className="status-pill">PROOF SHIPPED · MILESTONE 01</span>
-                <h3>From CSV to one-click capture</h3>
+                <span className="status-pill">EXTENSION 0.1 SHIPPED · MILESTONE 01</span>
+                <h3>From developer preview to cross-browser release</h3>
                 <p>
-                  Local Reddit CSV import already works without an account,
-                  token or upload. Funding now covers the extension shell,
-                  minimal permissions, cross-browser tests and public privacy
-                  notes.
+                  Local Reddit CSV import and one-click active-tab capture now
+                  work without an account or remote vault. Funding covers
+                  Firefox packaging, automated browser tests, failure recovery
+                  and a public permission audit.
                 </p>
                 <div className="delivery-target">
                   <span>Target</span>
-                  <strong>Extension prototype within 7 days after funding</strong>
+                  <strong>Cross-browser release within 7 days after funding</strong>
                 </div>
               </article>
               <div className="milestones">

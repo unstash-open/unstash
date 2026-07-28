@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteHeader } from "../components/SiteHeader";
 import { VaultPrototype } from "./vault-prototype";
 
@@ -47,6 +48,7 @@ export default function PrototypePage() {
     featureList: [
       "Read, Make and Keep action labels",
       "Permission-free Reddit CSV import",
+      "Permission-light active-tab capture",
       "Local browser storage",
       "Queue search and completion",
       "Markdown export",
@@ -75,6 +77,11 @@ export default function PrototypePage() {
             export, choose a next action and keep a searchable queue. Everything
             is read and stored only in this browser.
           </p>
+          <div className="hero-actions">
+            <Link className="button button-dark" href="/extension">
+              Install extension 0.1 <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </section>
         <VaultPrototype />
       </main>

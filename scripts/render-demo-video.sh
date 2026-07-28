@@ -49,13 +49,13 @@ ffmpeg -y \
     [x1][v2]xfade=transition=fade:duration=0.4:offset=9.5[x2];
     [x2][v3]xfade=transition=fade:duration=0.4:offset=14.1[x3];
     [x3][v4]xfade=transition=fade:duration=0.4:offset=19.6[x4];
-    [x4][v5]xfade=transition=fade:duration=0.4:offset=24.8[x5];
+    [x4][v5]xfade=transition=fade:duration=0.4:offset=24.1[x5];
     [x5][7:v]overlay=0:0:enable='between(t,0,3.7)'[c1];
     [c1][8:v]overlay=0:0:enable='between(t,3.7,9.5)'[c2];
     [c2][9:v]overlay=0:0:enable='between(t,9.5,14.1)'[c3];
     [c3][10:v]overlay=0:0:enable='between(t,14.1,19.6)'[c4];
-    [c4][11:v]overlay=0:0:enable='between(t,19.6,24.8)'[c5];
-    [c5][12:v]overlay=0:0:enable='between(t,24.8,29)'[video];
+    [c4][11:v]overlay=0:0:enable='between(t,19.6,24.1)'[c5];
+    [c5][12:v]overlay=0:0:enable='between(t,24.1,29)'[video];
     [6:a]aresample=48000,volume=1.05,apad,atrim=duration=29,loudnorm=I=-16:TP=-1.5:LRA=11[audio]
   " \
   -map "[video]" \

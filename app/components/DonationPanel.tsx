@@ -92,7 +92,7 @@ export function DonationPanel() {
     <aside className="donation-panel" aria-label="Campaign funding progress">
       <div className="donation-top">
         <div className="donation-label-row">
-          <span>Milestone 01 · Extension hardening</span>
+          <span>Milestone 01 · Extension 0.1 hardening</span>
           <span className="chain-pill">ACTIVE · 500 USDT</span>
         </div>
         <div className="fund-total">

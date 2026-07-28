@@ -20,10 +20,11 @@ const budget = [
 ];
 
 const activeMilestoneBudget = [
-  ["Extension + live capture", "Permission-light extension shell and local save capture.", "220"],
-  ["Import reliability", "Additional export variants, deduplication and failure recovery.", "100"],
-  ["Permission documentation", "Public threat notes and a readable permission rationale.", "80"],
-  ["Cross-browser testing", "Chrome-family and Firefox packaging smoke tests.", "80"],
+  ["Cross-browser packaging", "Firefox support and hardened Chrome-family packaging.", "150"],
+  ["Capture reliability", "Duplicate handling, failure recovery and safer handoff checks.", "110"],
+  ["Permission audit", "Public threat notes and a readable activeTab rationale.", "80"],
+  ["Automated browser tests", "Repeatable capture and import checks across supported browsers.", "90"],
+  ["Store release + docs", "Submission assets, install guides and release notes.", "50"],
   ["Milestone buffer", "A capped allowance for unexpected integration work.", "20"],
 ];
 
@@ -36,9 +37,10 @@ export default function TransparencyPage() {
           <div className="section-kicker">Public funding policy</div>
           <h1>Every contribution has a visible job.</h1>
           <p>
-            Permission-free Reddit CSV import shipped before any contribution.
-            The active 500 USDT target funds extension hardening, while this page
-            also defines the broader 10,000 USDT roadmap and accounting rules.
+            Permission-free Reddit CSV import and extension 0.1 shipped before
+            any contribution. The active 500 USDT target funds cross-browser
+            hardening, while this page also defines the broader 10,000 USDT
+            roadmap and accounting rules.
           </p>
         </section>
 
@@ -58,9 +60,9 @@ export default function TransparencyPage() {
               ))}
             </div>
             <p className="budget-note">
-              Delivery target: a public permission-light extension prototype
-              within 7 days after this milestone is fully funded. Scope and
-              source changes are published openly.
+              Delivery target: turn the public Chromium developer preview into
+              a tested cross-browser release within 7 days after this milestone
+              is fully funded. Scope and source changes are published openly.
             </p>
           </div>
         </section>

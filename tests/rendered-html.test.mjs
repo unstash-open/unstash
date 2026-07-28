@@ -31,34 +31,42 @@ test("server-renders the Unstash campaign page", async () => {
   assert.match(html, /Saved/);
   assert.match(html, /Unstash turns forgotten saved posts/);
   assert.match(html, /Fund one useful upgrade/);
-  assert.match(html, /From CSV to one-click capture/);
+  assert.match(html, /From developer preview to cross-browser release/);
   assert.match(html, /500 USDT/);
   assert.match(html, /10,000 USDT/);
   assert.match(html, /Try the working prototype/);
-  assert.match(html, /See the shipped importer in 29 seconds/);
+  assert.match(html, /Get extension 0\.1/);
+  assert.match(html, /See the private workflow in 29 seconds/);
   assert.match(html, /\/unstash-demo\.mp4/);
   assert.match(html, /synthetic voice/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("server-renders the prototype and transparency pages", async () => {
-  const [prototype, transparency] = await Promise.all([
+test("server-renders the prototype, extension and transparency pages", async () => {
+  const [prototype, extension, transparency] = await Promise.all([
     render("/prototype"),
+    render("/extension"),
     render("/transparency"),
   ]);
   assert.equal(prototype.status, 200);
+  assert.equal(extension.status, 200);
   assert.equal(transparency.status, 200);
 
-  const [prototypeHtml, transparencyHtml] = await Promise.all([
+  const [prototypeHtml, extensionHtml, transparencyHtml] = await Promise.all([
     prototype.text(),
+    extension.text(),
     transparency.text(),
   ]);
   assert.match(prototypeHtml, /Working local prototype/);
   assert.match(prototypeHtml, /Import Reddit saves without signing in/);
   assert.match(prototypeHtml, /SHIPPED · PERMISSION-FREE/);
   assert.match(prototypeHtml, /Add to queue/);
+  assert.match(extensionHtml, /Save the tab\. Pick what happens next/);
+  assert.match(extensionHtml, /Download extension 0\.1/);
+  assert.match(extensionHtml, /activeTab/);
+  assert.match(extensionHtml, /\/unstash-extension-v0\.1\.0\.zip/);
   assert.match(transparencyHtml, /Every contribution has a visible job/);
   assert.match(transparencyHtml, /Active milestone/);
-  assert.match(transparencyHtml, /Extension \+ live capture/);
+  assert.match(transparencyHtml, /Cross-browser packaging/);
   assert.match(transparencyHtml, /Core product development/);
 });
