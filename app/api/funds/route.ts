@@ -187,7 +187,8 @@ export async function GET() {
     {
       status: availableCount === 2 ? "live" : availableCount === 1 ? "partial" : "unavailable",
       amount: trc20.amount + erc20.amount,
-      goal: PROJECT.goalUsdt,
+      goal: PROJECT.activeMilestone.goalUsdt,
+      stretchGoal: PROJECT.goalUsdt,
       transactionCount: trc20.transactionCount + erc20.transactionCount,
       breakdown: { trc20, erc20 },
       updatedAt: new Date().toISOString(),

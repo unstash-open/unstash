@@ -7,6 +7,7 @@ import { PROJECT, explorerUrls, walletsConfigured } from "../../lib/project";
 type FundResponse = {
   amount: number;
   goal: number;
+  stretchGoal?: number;
   transactionCount: number;
   status: "live" | "partial" | "unavailable";
   updatedAt: string;
@@ -18,7 +19,8 @@ type FundResponse = {
 
 const fallback: FundResponse = {
   amount: 0,
-  goal: PROJECT.goalUsdt,
+  goal: PROJECT.activeMilestone.goalUsdt,
+  stretchGoal: PROJECT.goalUsdt,
   transactionCount: 0,
   status: "unavailable",
   updatedAt: PROJECT.launchAt,
