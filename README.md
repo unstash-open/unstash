@@ -6,10 +6,13 @@ tracking and no remote database.
 
 Live project: **https://unstash-open.vercel.app**
 
-The project is being built in public through a voluntary 10,000 USDT campaign.
-Read [FUNDING.md](./FUNDING.md) before contributing. Launch ops and Plan B
-channels: [docs/OPERATIONS.md](./docs/OPERATIONS.md),
-[docs/CHANNEL_LAUNCH.md](./docs/CHANNEL_LAUNCH.md).
+The active public milestone is **500 USDT** for a permission-light Reddit
+saved-post import prototype. The broader **10,000 USDT** roadmap remains a
+transparent stretch plan, not a requirement to start shipping. Read
+[FUNDING.md](./FUNDING.md) before contributing. Launch operations and channel
+drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
+[docs/CHANNEL_LAUNCH.md](./docs/CHANNEL_LAUNCH.md) and
+[docs/MILESTONE_LAUNCH.md](./docs/MILESTONE_LAUNCH.md).
 
 ## What works today
 
@@ -21,10 +24,10 @@ channels: [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 
 ## Roadmap
 
-1. Harden the local vault and import/export.
-2. Add a browser extension and permission-light Reddit OAuth import.
-3. Add on-device search, resurfacing and optional local summaries.
-4. Complete cross-browser QA, accessibility review and the v1 release.
+1. **0–500 USDT:** prototype a permission-light Reddit saved-post import.
+2. **500–2,000 USDT:** harden the browser extension and import flow.
+3. **2,000–5,000 USDT:** add useful on-device resurfacing and summaries.
+4. **5,000–10,000 USDT:** complete cross-browser QA, accessibility and v1.
 
 ## Development
 

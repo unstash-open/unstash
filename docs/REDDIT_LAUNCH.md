@@ -1,5 +1,9 @@
 # Reddit launch pack
 
+This file archives the first-launch copy. Use
+[MILESTONE_LAUNCH.md](./MILESTONE_LAUNCH.md) for the next product update; do not
+repost the drafts below unchanged.
+
 Every post must be adapted to the target community and checked against its
 current rules before submission. Do not mass-post identical text, automate
 unsolicited messages, ask for upvotes or use supporting accounts.

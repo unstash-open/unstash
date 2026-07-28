@@ -30,6 +30,9 @@ test("server-renders the Unstash campaign page", async () => {
   const html = await response.text();
   assert.match(html, /Saved/);
   assert.match(html, /Unstash turns forgotten saved posts/);
+  assert.match(html, /Fund one useful upgrade/);
+  assert.match(html, /Reddit import prototype/);
+  assert.match(html, /500 USDT/);
   assert.match(html, /10,000 USDT/);
   assert.match(html, /Try the working prototype/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
@@ -50,5 +53,7 @@ test("server-renders the prototype and transparency pages", async () => {
   assert.match(prototypeHtml, /Working local prototype/);
   assert.match(prototypeHtml, /Add to queue/);
   assert.match(transparencyHtml, /Every contribution has a visible job/);
+  assert.match(transparencyHtml, /Active milestone/);
+  assert.match(transparencyHtml, /Extension scaffold/);
   assert.match(transparencyHtml, /Core product development/);
 });

@@ -19,6 +19,14 @@ const budget = [
   ["Contingency", "A capped buffer for unexpected project costs.", "350"],
 ];
 
+const activeMilestoneBudget = [
+  ["Extension scaffold", "Minimal browser-extension shell and local import flow.", "180"],
+  ["Import mapping", "Saved-post parsing, deduplication and local queue mapping.", "160"],
+  ["Permission documentation", "Public threat notes and a readable permission rationale.", "80"],
+  ["Cross-browser testing", "Chrome-family and Firefox packaging smoke tests.", "60"],
+  ["Milestone buffer", "A capped allowance for unexpected integration work.", "20"],
+];
+
 export default function TransparencyPage() {
   return (
     <>
@@ -28,17 +36,18 @@ export default function TransparencyPage() {
           <div className="section-kicker">Public funding policy</div>
           <h1>Every contribution has a visible job.</h1>
           <p>
-            This page defines what counts toward the 10,000 USDT target, how the
-            funds may be used and what contributors should—and should not—expect.
+            The active target is 500 USDT for a permission-light Reddit import
+            prototype. This page also defines the broader 10,000 USDT roadmap,
+            accounting rules and contributor expectations.
           </p>
         </section>
 
         <section className="transparency-grid">
           <DonationPanel />
           <div>
-            <div className="section-kicker">Budget · 10,000 USDT</div>
+            <div className="section-kicker">Active milestone · 500 USDT</div>
             <div className="budget-table">
-              {budget.map(([title, copy, amount]) => (
+              {activeMilestoneBudget.map(([title, copy, amount]) => (
                 <div className="budget-row" key={title}>
                   <div>
                     <h3>{title}</h3>
@@ -48,6 +57,26 @@ export default function TransparencyPage() {
                 </div>
               ))}
             </div>
+            <p className="budget-note">
+              Delivery target: a public prototype within 7 days after this
+              milestone is fully funded. Scope and source changes are published
+              openly.
+            </p>
+          </div>
+        </section>
+
+        <section className="roadmap-budget">
+          <div className="section-kicker">Stretch roadmap · 10,000 USDT</div>
+          <div className="budget-table">
+            {budget.map(([title, copy, amount]) => (
+              <div className="budget-row" key={title}>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+                <strong>{amount}</strong>
+              </div>
+            ))}
           </div>
         </section>
 

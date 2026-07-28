@@ -1,6 +1,14 @@
 export const PROJECT = {
   name: "Unstash",
   goalUsdt: 10_000,
+  activeMilestone: {
+    id: "reddit-import",
+    title: "Permission-light Reddit import",
+    goalUsdt: 500,
+    deliveryTarget:
+      "Public prototype within 7 days after the milestone is funded.",
+  },
+  suggestedContributions: [10, 25, 100],
   launchAt: "2026-07-23T14:26:45.000Z",
   wallets: {
     trc20: "TJcZKX3LvhoLnLRmdT3sPff1qs5cNtLZT8",

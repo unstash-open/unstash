@@ -38,9 +38,10 @@ on-device summaries and resurfacing.
 Live prototype: https://unstash-open.vercel.app  
 Source: https://github.com/unstash-open/unstash
 
-I am funding the remaining roadmap with a voluntary 10,000 USDT public wallet
-campaign (not an investment: no token, equity or return). Criticism of the
-product loop is more useful than money right now.
+The next public milestone is a permission-light Reddit import prototype. The
+project page shows its 500 USDT budget and public ledger; support is optional
+and is not an investment. Criticism of the product loop is more useful than
+money right now.
 
 Curious what HN thinks is the right resurfacing cadence: daily queue, weekly
 digest, or only search-when-needed?
@@ -49,7 +50,7 @@ digest, or only search-when-needed?
 
 **Title**
 
-Building a local-first “saved ≠ used” queue in public (no account, USDT ledger)
+Building a local-first “saved ≠ used” queue in public (no account)
 
 **Body**
 
@@ -63,12 +64,12 @@ What ships today:
 - search + completion;
 - Markdown export.
 
-What I am shipping next (milestone 1): harder vault, reliable import/export,
-then extension + Reddit import.
+What I am shipping next: a permission-light Reddit saved-post import prototype.
 
-I am running a transparent voluntary funding goal of 10,000 USDT with a public
-budget and on-chain total. Contributions buy nothing financial. If the target
-is not reached, scope shrinks with funding — the released prototype stays up.
+The active milestone has a transparent 500 USDT budget and public on-chain
+total. The broader 10,000 USDT roadmap is a stretch plan. Contributions buy
+nothing financial; the released prototype stays up even if the milestone is
+not reached.
 
 Links:
 

@@ -46,8 +46,10 @@ Rules for every channel:
 
 ### Funding rails
 
-- Source of truth for the 10,000 USDT target remains the public TRC20 and ERC20
-  campaign wallets and the on-chain accounting rule in FUNDING.md.
+- The active target is 500 USDT for the Reddit import prototype. The 10,000
+  USDT figure is the broader stretch roadmap.
+- Source of truth remains the public TRC20 and ERC20 campaign wallets and the
+  on-chain accounting rule in FUNDING.md.
 - Optional fiat doors (GitHub Sponsors, Ko-fi, Liberapay, Open Collective) may
   be added later as convenience. Until an explicit conversion rule is published,
   fiat support does **not** count toward the USDT target.
@@ -55,7 +57,7 @@ Rules for every channel:
 
 ### Product cadence while waiting
 
-1. Harden local vault + import/export (roadmap milestone 1).
+1. Prototype permission-light Reddit import (active 500 USDT milestone).
 2. Post a weekly update (template below) even if incoming USDT is zero.
 3. Keep a 30–45s demo of paste → action → Markdown export ready to attach.
 

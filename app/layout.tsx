@@ -58,7 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${origin}/og.png`,
           width: 1536,
           height: 1024,
-          alt: "Unstash — saved does not mean used",
+          alt: "Unstash — private local-first queue with a 500 USDT Reddit import milestone",
         },
       ],
     },

@@ -5,22 +5,22 @@ import { SiteHeader } from "./components/SiteHeader";
 
 const milestones = [
   {
-    amount: "0—2K",
-    title: "Private vault",
-    copy: "Polish the local-first prototype, add reliable import/export and ship the public source.",
+    amount: "0—500",
+    title: "Reddit import prototype",
+    copy: "Ship a permission-light proof of concept, document every requested permission and publish the source.",
+  },
+  {
+    amount: "500—2K",
+    title: "Extension hardening",
+    copy: "Add reliable import/export, cross-browser packaging and safer failure recovery.",
   },
   {
     amount: "2—5K",
-    title: "One-click import",
-    copy: "Build the browser extension and a permission-light Reddit OAuth importer.",
-  },
-  {
-    amount: "5—8K",
     title: "Useful resurfacing",
     copy: "Add on-device search, summaries and a daily queue without selling or training on user data.",
   },
   {
-    amount: "8—10K",
+    amount: "5—10K",
     title: "Ready for everyone",
     copy: "Cross-browser QA, accessibility review, documentation and a stable v1 release.",
   },
@@ -59,7 +59,7 @@ export default function Home() {
                 <span aria-hidden="true">↗</span>
               </Link>
               <a className="button button-ghost" href="#fund">
-                See the $10K roadmap
+                Fund the Reddit import
               </a>
             </div>
             <p className="microcopy">
@@ -161,7 +161,7 @@ export default function Home() {
                   <div className="unstash-box">UNSTASH</div>
                 </div>
                 <h3>Bring it in</h3>
-                <p>Paste a link today. One-click import arrives at milestone two.</p>
+                <p>Paste a link today. One-click Reddit import is the active milestone.</p>
               </article>
               <article className="workflow-card featured">
                 <span className="step-number">2</span>
@@ -206,26 +206,41 @@ export default function Home() {
         <section className="funding-section shell" id="fund">
           <div className="funding-intro">
             <div className="section-kicker">03 · THE FUND</div>
-            <h2>Help ship the version your saves deserve.</h2>
+            <h2>Fund one useful upgrade.</h2>
             <p>
-              The target is 10,000 USDT. Contributions are voluntary and fund
-              development time plus the published project costs—nothing more is
-              promised in return.
+              The active target is 500 USDT for a permission-light Reddit import
+              prototype. The broader 10,000 USDT roadmap stays public, but this
+              first contribution window has one job and one verifiable output.
             </p>
           </div>
 
           <div className="funding-layout">
             <DonationPanel />
-            <div className="milestones">
-              {milestones.map((milestone) => (
-                <article className="milestone" key={milestone.amount}>
-                  <span>{milestone.amount} USDT</span>
-                  <div>
-                    <h3>{milestone.title}</h3>
-                    <p>{milestone.copy}</p>
-                  </div>
-                </article>
-              ))}
+            <div>
+              <article className="active-milestone">
+                <span className="status-pill">ACTIVE MILESTONE · 01</span>
+                <h3>One-click Reddit import</h3>
+                <p>
+                  A public proof of concept that imports saved posts without
+                  asking for broad account access. Source, permission notes and
+                  progress updates will be published as it ships.
+                </p>
+                <div className="delivery-target">
+                  <span>Target</span>
+                  <strong>Public prototype within 7 days after funding</strong>
+                </div>
+              </article>
+              <div className="milestones">
+                {milestones.map((milestone) => (
+                  <article className="milestone" key={milestone.amount}>
+                    <span>{milestone.amount} USDT</span>
+                    <div>
+                      <h3>{milestone.title}</h3>
+                      <p>{milestone.copy}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type ActionType = "read" | "make" | "keep";
@@ -57,16 +58,21 @@ export function VaultPrototype() {
   const [title, setTitle] = useState("");
   const [action, setAction] = useState<ActionType>("read");
   const [query, setQuery] = useState("");
+  const [didExport, setDidExport] = useState(false);
 
   useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved) setItems(JSON.parse(saved) as VaultItem[]);
-    } catch {
-      setItems([]);
-    } finally {
-      setHydrated(true);
-    }
+    const loadTimer = window.setTimeout(() => {
+      try {
+        const saved = window.localStorage.getItem(STORAGE_KEY);
+        if (saved) setItems(JSON.parse(saved) as VaultItem[]);
+      } catch {
+        setItems([]);
+      } finally {
+        setHydrated(true);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(loadTimer);
   }, []);
 
   useEffect(() => {
@@ -128,7 +134,13 @@ export function VaultPrototype() {
     anchor.download = "unstash-queue.md";
     anchor.click();
     URL.revokeObjectURL(href);
+    setDidExport(true);
   };
+
+  const showSupport =
+    didExport ||
+    items.length >= 3 ||
+    items.some((item) => item.completed);
 
   return (
     <>
@@ -290,6 +302,23 @@ export function VaultPrototype() {
           </div>
         )}
       </section>
+
+      {showSupport ? (
+        <aside className="prototype-support" aria-label="Support the next Unstash milestone">
+          <div>
+            <span className="status-pill">YOU USED THE PROTOTYPE</span>
+            <h2>Want one-click Reddit import next?</h2>
+            <p>
+              The first funding milestone is 500 USDT for a public,
+              permission-light import prototype. Support is optional; your
+              queue stays private either way.
+            </p>
+          </div>
+          <Link className="button button-dark" href="/#fund">
+            See the 500 USDT milestone <span aria-hidden="true">→</span>
+          </Link>
+        </aside>
+      ) : null}
     </>
   );
 }
