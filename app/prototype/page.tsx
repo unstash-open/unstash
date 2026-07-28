@@ -6,7 +6,7 @@ import { VaultPrototype } from "./vault-prototype";
 export const metadata: Metadata = {
   title: "Import Reddit saves locally",
   description:
-    "Import Reddit saved-post CSV files locally, choose Read, Make or Keep, and export your private queue. No account or tracking.",
+    "Import Reddit saved-post CSV files locally, choose Read, Make or Keep, and export your private queue without an account or remote vault.",
   alternates: {
     canonical: "/prototype",
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Unstash — turn saved links into next steps",
     description:
-      "Import Reddit saves into a local-first action queue. No account, no tracking, and data stays in your browser.",
+      "Import Reddit saves into a local-first action queue. Queue data stays in your browser.",
     url: "/prototype",
     siteName: "Unstash",
     images: [
@@ -52,7 +52,7 @@ export default function PrototypePage() {
       "Local browser storage",
       "Queue search and completion",
       "Markdown export",
-      "No account or tracking",
+      "No account or remote queue storage",
     ],
     url: "https://unstash-open.vercel.app/prototype",
     codeRepository: "https://github.com/unstash-open/unstash",

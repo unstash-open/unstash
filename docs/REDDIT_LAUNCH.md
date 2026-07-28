@@ -33,7 +33,7 @@ What works now:
 - action labels and completion;
 - search;
 - Markdown export;
-- no account or tracking.
+- no account or remote queue database.
 
 What is not built yet:
 

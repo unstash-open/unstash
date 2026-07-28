@@ -13,6 +13,10 @@ export function SiteFooter() {
           <p className="footer-copy">
             Independent open-source software · Not a charity or investment
           </p>
+          <p className="footer-privacy">
+            Anonymous route-level page counts · no cookies, saved-link telemetry
+            or cross-site tracking
+          </p>
         </div>
         <div className="footer-links">
           <Link href="/prototype">Prototype</Link>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PROJECT } from "../lib/project";
+import { PrivacyAnalytics } from "./components/PrivacyAnalytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,11 +17,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(PROJECT.siteUrl),
   title: {
-    default: "Unstash — turn saved links into next steps",
+    default: "Unstash — one tab, one next step",
     template: "%s · Unstash",
   },
   description:
-    "Capture a tab or import Reddit saves into a private local-first action queue without an account or remote vault.",
+    "Capture the current tab or import Reddit saves into a private local-first action queue with activeTab only.",
   applicationName: "Unstash",
   keywords: [
     "bookmark manager",
@@ -39,26 +40,26 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Unstash Capture 0.1 — one permission, private by default",
+    title: "Unstash 0.1 — one tab, one next step",
     description:
-      "Capture the active tab or import Reddit CSV files into a private local queue.",
+      "Capture the current tab or import Reddit CSV files into a private local queue with activeTab only.",
     url: PROJECT.siteUrl,
     siteName: "Unstash",
     images: [
       {
-        url: `${PROJECT.siteUrl}/og-extension.png`,
+        url: `${PROJECT.siteUrl}/og-launch.jpg`,
         width: 1536,
         height: 1024,
-        alt: "Unstash Capture 0.1 — save the tab and pick what happens next",
+        alt: "Unstash 0.1 — one tab, one next step",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Unstash Capture 0.1",
+    title: "Unstash 0.1 — one tab, one next step",
     description:
-      "Save the active tab with one permission and no remote vault.",
-    images: [`${PROJECT.siteUrl}/og-extension.png`],
+      "Save the current tab with one permission and no remote vault.",
+    images: [`${PROJECT.siteUrl}/og-launch.jpg`],
   },
 };
 
@@ -78,6 +79,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <PrivacyAnalytics />
       </body>
     </html>
   );

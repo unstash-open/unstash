@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PROJECT } from "../lib/project";
 import { DonationPanel } from "./components/DonationPanel";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
@@ -33,6 +34,12 @@ const principles = [
   ["Public ledger", "The campaign wallet, cutoff date, incoming transfers and budget are visible."],
 ];
 
+const testerSteps = [
+  ["01", "Try one real save", "Capture a tab or import Reddit CSV, then choose Read, Make or Keep."],
+  ["02", "Say what felt wrong", "Report the first confusing step, broken edge or permission concern."],
+  ["03", "Shape the next release", "Tell us whether activeTab is acceptable or CSV-only feels safer."],
+];
+
 export default function Home() {
   return (
     <>
@@ -42,28 +49,29 @@ export default function Home() {
           <div className="hero-copy">
             <div className="eyebrow">
               <span className="live-dot" aria-hidden="true" />
-              Public build · voluntary funding
+              Live tool · Chromium extension 0.1
             </div>
             <h1>
-              Saved
+              One tab.
               <br />
-              <span>≠ used.</span>
+              <span>One next step.</span>
             </h1>
             <p className="hero-lead">
-              Unstash turns forgotten saved posts into a private, searchable
-              queue of things you will actually read, try and remember.
+              Capture the current tab or import your Reddit saves. Choose
+              Read, Make or Keep, then act on it from a private local queue.
             </p>
             <div className="hero-actions">
               <Link className="button button-dark" href="/prototype">
-                Try the working prototype
+                Try it in 30 seconds
                 <span aria-hidden="true">↗</span>
               </Link>
               <Link className="button button-ghost" href="/extension">
-                Get extension 0.1
+                Install extension 0.1
               </Link>
             </div>
             <p className="microcopy">
-              No account. No tracking. Prototype data stays on this device.
+              No account, cookies or remote vault. Saved links stay on this
+              device; only anonymous route-level page counts are collected.
             </p>
           </div>
 
@@ -117,9 +125,9 @@ export default function Home() {
           <div className="ticker-track">
             <span>OPEN SOURCE</span><i>✦</i>
             <span>LOCAL FIRST</span><i>✦</i>
-            <span>NO ADS</span><i>✦</i>
-            <span>NO SUBSCRIPTION TRAP</span><i>✦</i>
-            <span>PUBLIC FUNDING LEDGER</span><i>✦</i>
+            <span>ACTIVETAB ONLY</span><i>✦</i>
+            <span>NO HOST ACCESS</span><i>✦</i>
+            <span>REDDIT CSV IMPORT</span><i>✦</i>
           </div>
         </section>
 
@@ -241,9 +249,52 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="tester-section shell" id="test">
+          <div className="tester-heading">
+            <div>
+              <div className="section-kicker">04 · FOUNDING TESTERS</div>
+              <h2>Five honest tests beat five thousand impressions.</h2>
+            </div>
+            <div className="tester-intro">
+              <span className="status-pill">OPEN CALL · 5 TEST NOTES</span>
+              <p>
+                Use Unstash once with a real link. No praise is required. The
+                useful contribution is the first thing that feels confusing,
+                unsafe or unnecessary.
+              </p>
+            </div>
+          </div>
+          <div className="tester-steps">
+            {testerSteps.map(([number, title, copy]) => (
+              <article key={number}>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+          <div className="tester-actions">
+            <Link className="button button-dark" href="/prototype">
+              Test the local queue <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              className="button button-ghost"
+              href={PROJECT.feedbackUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Report what broke <span aria-hidden="true">↗</span>
+            </a>
+            <p>
+              Feedback is public by default. Do not include private links,
+              exported Reddit data or personal information.
+            </p>
+          </div>
+        </section>
+
         <section className="funding-section shell" id="fund">
           <div className="funding-intro">
-            <div className="section-kicker">04 · THE FUND</div>
+            <div className="section-kicker">05 · OPTIONAL FUNDING</div>
             <h2>Fund one useful upgrade.</h2>
             <p>
               The permission-free CSV importer and Chromium extension preview
@@ -289,7 +340,7 @@ export default function Home() {
           <div className="shell">
             <div className="section-heading inverse">
               <div>
-                <div className="section-kicker">05 · THE PROMISE</div>
+                <div className="section-kicker">06 · THE PROMISE</div>
                 <h2>Trust is a feature.</h2>
               </div>
               <Link className="text-link light-link" href="/transparency">
@@ -309,7 +360,7 @@ export default function Home() {
         </section>
 
         <section className="faq-section shell" id="faq">
-          <div className="section-kicker">06 · STRAIGHT ANSWERS</div>
+          <div className="section-kicker">07 · STRAIGHT ANSWERS</div>
           <div className="faq-layout">
             <h2>Before you contribute.</h2>
             <div className="faq-list">
@@ -342,6 +393,16 @@ export default function Home() {
                 <p>
                   Yes. Test the prototype, report bugs, improve documentation or
                   share thoughtful feedback. Those contributions are just as real.
+                </p>
+              </details>
+              <details>
+                <summary>Does the site track visitors?</summary>
+                <p>
+                  The product never uploads saved links or queue contents. The
+                  public site records anonymous, cookie-free page views at the
+                  route level so we can distinguish visits to the landing page,
+                  prototype and extension. Query strings and URL fragments are
+                  removed before analytics are sent.
                 </p>
               </details>
             </div>

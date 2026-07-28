@@ -1,9 +1,9 @@
 # Extension 0.1 milestone launch
 
 Use this pack for the next product update only after the community's repeat-post
-rules and timing allow it. Product evidence comes first; funding is one short,
-secondary disclosure. Never ask for votes, manufacture traction or send
-unsolicited messages.
+rules and timing allow it. Keep the Reddit update entirely product-focused.
+Never mention funding, ask for votes, manufacture traction or send unsolicited
+messages.
 
 ## AI-produced 29-second demo
 
@@ -34,18 +34,20 @@ Suggested caption:
 
 **Title**
 
-I shipped a browser extension that captures one tab with one permission
+Unstash 0.1: a private tab-to-action queue with one Chromium permission
 
 **Body**
 
-The first Unstash prototype required pasting saved links or importing Reddit
-CSV files. The new Chromium developer preview captures the active tab, asks
-what happens next—Read / Make / Keep—and sends it to the local queue.
+This is an update to my own project. The first Unstash prototype required
+pasting saved links or importing Reddit CSV files. The new Chromium developer
+preview captures the active tab, asks what happens next—Read / Make / Keep—and
+sends it to the local queue.
 
 The manifest requests only `activeTab`, which is granted when the extension
-icon is clicked. It has no host permissions, content script, Reddit login,
-analytics or remote vault. The URL and title travel in a URL fragment that is
-not sent in the HTTP request and is cleared after local import.
+icon is clicked. It has no host permissions, content script, background
+service, Reddit login or remote vault. The URL and title travel in a URL
+fragment that is not sent in the HTTP request and is cleared after local
+import.
 
 What works now:
 
@@ -53,18 +55,15 @@ What works now:
 - one-click active-tab capture in Chromium browsers;
 - manual link capture;
 - action labels, search, completion and Markdown export;
-- no account, tracking or remote database.
+- no account or remote queue database.
+
+Demo: https://unstash-open.vercel.app/unstash-demo.mp4
 
 Prototype: https://unstash-open.vercel.app/prototype
 
-Extension: https://unstash-open.vercel.app/extension
+Release: https://github.com/unstash-open/unstash/releases/tag/v0.1.0
 
 Source: https://github.com/unstash-open/unstash
-
-The optional 500 USDT milestone now funds Firefox packaging, automated browser
-tests, failure recovery and store-ready documentation. The Chromium proof
-shipped before any contribution. It is not an investment and no contribution
-is required to test or criticize the product.
 
 Would `activeTab` be acceptable for a tool like this, or would you still prefer
 the zero-permission CSV route?
@@ -73,7 +72,7 @@ the zero-permission CSV route?
 
 - Answer the product or privacy question before mentioning funding.
 - Be explicit that both CSV import and extension 0.1 are shipped.
-- Link to the funding policy only when someone asks about money or scope.
+- Do not introduce funding in the post or replies unless someone explicitly asks.
 - Never imply users, contributors or donations that do not exist.
 - If removed, ask moderators once for the rule or reason, then stop.
 - Do not repost the same text in another subreddit.

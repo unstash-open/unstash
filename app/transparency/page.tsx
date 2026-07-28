@@ -109,6 +109,16 @@ export default function TransparencyPage() {
               cannot be refunded automatically.
             </p>
           </article>
+          <article className="policy-card">
+            <span>PRODUCT METRICS</span>
+            <h3>Aggregate routes, never saved links.</h3>
+            <p>
+              Cookie-free analytics count anonymous visits to public routes and
+              their referrers. Query strings and fragments are removed before
+              collection. Queue contents, imported files, captured URLs and
+              wallet activity are never included in analytics events.
+            </p>
+          </article>
         </section>
       </main>
       <SiteFooter />

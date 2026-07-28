@@ -1,0 +1,46 @@
+name: Unstash beta feedback
+description: Report the first confusing, broken or unnecessary part of the local workflow.
+title: "[Beta feedback] "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Unstash with a real workflow. Do not paste private URLs, Reddit export contents, wallet information or other personal data.
+  - type: dropdown
+    id: path
+    attributes:
+      label: What did you try?
+      options:
+        - Active-tab capture with extension 0.1
+        - Reddit CSV import
+        - Manual link capture
+        - Search, completion or Markdown export
+        - Install or permission review
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What was the first confusing or broken thing?
+      description: One concrete observation is more useful than general praise.
+      placeholder: I expected… but instead…
+    validations:
+      required: true
+  - type: dropdown
+    id: permission
+    attributes:
+      label: Which capture model would you prefer?
+      options:
+        - activeTab is acceptable
+        - CSV-only feels safer
+        - I am not sure yet
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser or environment
+      description: Optional. Do not include account names or identifying details.
+      placeholder: Chrome 140 on macOS

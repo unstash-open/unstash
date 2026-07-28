@@ -22,6 +22,8 @@ export const PROJECT = {
   },
   ethereumLaunchBlock: "0x1869072",
   sourceUrl: "https://github.com/unstash-open/unstash",
+  feedbackUrl:
+    "https://github.com/unstash-open/unstash/issues/new?title=%5BBeta%20feedback%5D%20&body=What%20I%20tried%3A%20%0A%0AThe%20first%20confusing%20or%20broken%20thing%3A%20%0A%0AI%20would%20prefer%3A%20activeTab%20%2F%20CSV-only%20%2F%20not%20sure%0A%0APlease%20do%20not%20include%20private%20links%20or%20personal%20data.",
 } as const;
 
 export const walletsConfigured = {
