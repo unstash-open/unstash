@@ -15,12 +15,12 @@ Video: https://unstash-open.vercel.app/unstash-demo.mp4
 
 | Time | Shot |
 | --- | --- |
-| 0–4s | AI title card: “Saved ≠ used” |
-| 4–9.2s | Show the permission-free Reddit CSV import panel |
-| 9.2–13.8s | Import a sample `saved_posts.csv` locally |
-| 13.8–19.4s | Show imported cards and mark one done |
-| 19.4–24s | Search the local queue |
-| 24–29s | “CSV import shipped · extension hardening 500 USDT” |
+| 0–3.7s | AI title card: “Saved ≠ used” |
+| 3.7–9.5s | Show the permission-free Reddit CSV import panel |
+| 9.5–14.1s | Import a sample `saved_posts.csv` locally |
+| 14.1–19.6s | Show imported cards and mark one done |
+| 19.6–24.8s | Search the local queue |
+| 24.8–29s | “CSV import shipped · extension hardening 500 USDT” |
 
 Suggested caption:
 
