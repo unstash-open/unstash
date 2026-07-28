@@ -3,10 +3,10 @@ export const PROJECT = {
   goalUsdt: 10_000,
   activeMilestone: {
     id: "reddit-import",
-    title: "Permission-light Reddit import",
+    title: "Reddit extension hardening",
     goalUsdt: 500,
     deliveryTarget:
-      "Public prototype within 7 days after the milestone is funded.",
+      "CSV import is live. A permission-light extension prototype ships within 7 days after the milestone is funded.",
   },
   suggestedContributions: [10, 25, 100],
   launchAt: "2026-07-23T14:26:45.000Z",

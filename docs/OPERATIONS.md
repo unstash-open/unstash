@@ -46,8 +46,9 @@ Rules for every channel:
 
 ### Funding rails
 
-- The active target is 500 USDT for the Reddit import prototype. The 10,000
-  USDT figure is the broader stretch roadmap.
+- Permission-free Reddit CSV import shipped before funding. The active target
+  is 500 USDT for extension hardening; 10,000 USDT is the broader stretch
+  roadmap.
 - Source of truth remains the public TRC20 and ERC20 campaign wallets and the
   on-chain accounting rule in FUNDING.md.
 - Optional fiat doors (GitHub Sponsors, Ko-fi, Liberapay, Open Collective) may
@@ -57,7 +58,7 @@ Rules for every channel:
 
 ### Product cadence while waiting
 
-1. Prototype permission-light Reddit import (active 500 USDT milestone).
+1. Harden the permission-light extension (active 500 USDT milestone).
 2. Post a weekly update (template below) even if incoming USDT is zero.
 3. Keep a 30–45s demo of paste → action → Markdown export ready to attach.
 

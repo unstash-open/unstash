@@ -1,7 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import {
+  normaliseRedditUrl,
+  parseRedditExportCsv,
+} from "../../lib/reddit-import";
 
 type ActionType = "read" | "make" | "keep";
 
@@ -57,6 +67,9 @@ export function VaultPrototype() {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [action, setAction] = useState<ActionType>("read");
+  const [importAction, setImportAction] = useState<ActionType>("read");
+  const [importMessage, setImportMessage] = useState("");
+  const [didImport, setDidImport] = useState(false);
   const [query, setQuery] = useState("");
   const [didExport, setDidExport] = useState(false);
 
@@ -137,7 +150,70 @@ export function VaultPrototype() {
     setDidExport(true);
   };
 
+  const importRedditCsv = async (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    const files = Array.from(input.files ?? []);
+    if (files.length === 0) return;
+
+    try {
+      const results = await Promise.all(
+        files.map(async (file) =>
+          parseRedditExportCsv(await file.text(), file.name),
+        ),
+      );
+      const candidates = results.flatMap((result) => result.items);
+      const seen = new Set(
+        items.map((item) => normaliseRedditUrl(item.url) ?? item.url),
+      );
+      const imported: VaultItem[] = [];
+      let duplicateCount = 0;
+
+      for (const candidate of candidates) {
+        if (seen.has(candidate.url)) {
+          duplicateCount += 1;
+          continue;
+        }
+        seen.add(candidate.url);
+        imported.push({
+          id: `reddit-${candidate.source}-${candidate.id}-${crypto.randomUUID()}`,
+          url: candidate.url,
+          title: candidate.title,
+          action: importAction,
+          createdAt: new Date().toISOString(),
+          completed: false,
+        });
+      }
+
+      const skippedCount =
+        results.reduce((total, result) => total + result.skipped, 0) +
+        duplicateCount;
+      const errors = results.flatMap((result) => result.errors);
+
+      if (imported.length > 0) {
+        setItems((current) => [...imported, ...current]);
+        setDidImport(true);
+        setImportMessage(
+          `${imported.length} Reddit save${imported.length === 1 ? "" : "s"} imported locally${
+            skippedCount > 0 ? ` · ${skippedCount} skipped` : ""
+          }.`,
+        );
+      } else {
+        setImportMessage(
+          errors[0] ??
+            "Nothing new was imported. Those links may already be in your queue.",
+        );
+      }
+    } catch {
+      setImportMessage(
+        "That file could not be read. Choose saved_posts.csv or saved_comments.csv from a Reddit data export.",
+      );
+    } finally {
+      input.value = "";
+    }
+  };
+
   const showSupport =
+    didImport ||
     didExport ||
     items.length >= 3 ||
     items.some((item) => item.completed);
@@ -186,6 +262,72 @@ export function VaultPrototype() {
           Privacy check: this form makes no network request. Refresh the page—your
           queue stays on this device.
         </p>
+      </section>
+
+      <section className="reddit-import" aria-labelledby="reddit-import-title">
+        <div className="reddit-import-copy">
+          <span className="status-pill">SHIPPED · PERMISSION-FREE</span>
+          <h2 id="reddit-import-title">Import your Reddit saves locally.</h2>
+          <p>
+            Choose <strong>saved_posts.csv</strong> or{" "}
+            <strong>saved_comments.csv</strong> from Reddit&apos;s official data
+            export. Unstash reads the file in this browser—no Reddit login,
+            OAuth token or upload.
+          </p>
+          <ul>
+            <li>The CSV never leaves this device.</li>
+            <li>Duplicate links are skipped automatically.</li>
+            <li>Every imported item gets the action you choose.</li>
+          </ul>
+        </div>
+        <div className="reddit-import-controls">
+          <div className="form-field">
+            <label htmlFor="reddit-import-action">Action for imported saves</label>
+            <select
+              id="reddit-import-action"
+              value={importAction}
+              onChange={(event) =>
+                setImportAction(event.target.value as ActionType)
+              }
+            >
+              <option value="read">Read</option>
+              <option value="make">Make</option>
+              <option value="keep">Keep</option>
+            </select>
+          </div>
+          <label className="button button-dark reddit-file-button">
+            Choose Reddit CSV
+            <input
+              accept=".csv,text/csv"
+              aria-describedby="reddit-import-status"
+              multiple
+              onChange={importRedditCsv}
+              type="file"
+            />
+          </label>
+          <a
+            className="reddit-export-link"
+            href="https://www.reddit.com/settings/data-request"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Request your Reddit data ↗
+          </a>
+          <a
+            className="reddit-export-link"
+            download
+            href="/sample-reddit-saves.csv"
+          >
+            Download a safe sample CSV ↓
+          </a>
+          <p
+            className={importMessage ? "reddit-import-status visible" : "reddit-import-status"}
+            id="reddit-import-status"
+            aria-live="polite"
+          >
+            {importMessage || "Ready for Reddit CSV files."}
+          </p>
+        </div>
       </section>
 
       <section aria-label="Your saved-link queue">
@@ -307,15 +449,15 @@ export function VaultPrototype() {
         <aside className="prototype-support" aria-label="Support the next Unstash milestone">
           <div>
             <span className="status-pill">YOU USED THE PROTOTYPE</span>
-            <h2>Want one-click Reddit import next?</h2>
+            <h2>Want the browser extension next?</h2>
             <p>
-              The first funding milestone is 500 USDT for a public,
-              permission-light import prototype. Support is optional; your
-              queue stays private either way.
+              Permission-free CSV import works now. The 500 USDT milestone
+              funds extension hardening, live-save capture and cross-browser
+              testing. Support is optional; your queue stays private either way.
             </p>
           </div>
           <Link className="button button-dark" href="/#fund">
-            See the 500 USDT milestone <span aria-hidden="true">→</span>
+            Fund extension hardening <span aria-hidden="true">→</span>
           </Link>
         </aside>
       ) : null}

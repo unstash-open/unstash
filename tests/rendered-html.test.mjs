@@ -31,10 +31,13 @@ test("server-renders the Unstash campaign page", async () => {
   assert.match(html, /Saved/);
   assert.match(html, /Unstash turns forgotten saved posts/);
   assert.match(html, /Fund one useful upgrade/);
-  assert.match(html, /Reddit import prototype/);
+  assert.match(html, /From CSV to one-click capture/);
   assert.match(html, /500 USDT/);
   assert.match(html, /10,000 USDT/);
   assert.match(html, /Try the working prototype/);
+  assert.match(html, /See the shipped importer in 29 seconds/);
+  assert.match(html, /\/unstash-demo\.mp4/);
+  assert.match(html, /synthetic voice/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -51,9 +54,11 @@ test("server-renders the prototype and transparency pages", async () => {
     transparency.text(),
   ]);
   assert.match(prototypeHtml, /Working local prototype/);
+  assert.match(prototypeHtml, /Import Reddit saves without signing in/);
+  assert.match(prototypeHtml, /SHIPPED · PERMISSION-FREE/);
   assert.match(prototypeHtml, /Add to queue/);
   assert.match(transparencyHtml, /Every contribution has a visible job/);
   assert.match(transparencyHtml, /Active milestone/);
-  assert.match(transparencyHtml, /Extension scaffold/);
+  assert.match(transparencyHtml, /Extension \+ live capture/);
   assert.match(transparencyHtml, /Core product development/);
 });

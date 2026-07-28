@@ -1,0 +1,11 @@
+Saved posts are easy to collect and hard to use.
+
+Unstash now imports Reddit's official saved-post CSV directly in your browser.
+
+No Reddit login. No OAuth token. No upload.
+
+Choose an action, search the queue, finish an item, and export everything to Markdown.
+
+The CSV importer is already live. The next milestone hardens it into a permission-light browser extension.
+
+Open source. Private by default. Try it now.

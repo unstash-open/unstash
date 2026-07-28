@@ -20,10 +20,10 @@ const budget = [
 ];
 
 const activeMilestoneBudget = [
-  ["Extension scaffold", "Minimal browser-extension shell and local import flow.", "180"],
-  ["Import mapping", "Saved-post parsing, deduplication and local queue mapping.", "160"],
+  ["Extension + live capture", "Permission-light extension shell and local save capture.", "220"],
+  ["Import reliability", "Additional export variants, deduplication and failure recovery.", "100"],
   ["Permission documentation", "Public threat notes and a readable permission rationale.", "80"],
-  ["Cross-browser testing", "Chrome-family and Firefox packaging smoke tests.", "60"],
+  ["Cross-browser testing", "Chrome-family and Firefox packaging smoke tests.", "80"],
   ["Milestone buffer", "A capped allowance for unexpected integration work.", "20"],
 ];
 
@@ -36,9 +36,9 @@ export default function TransparencyPage() {
           <div className="section-kicker">Public funding policy</div>
           <h1>Every contribution has a visible job.</h1>
           <p>
-            The active target is 500 USDT for a permission-light Reddit import
-            prototype. This page also defines the broader 10,000 USDT roadmap,
-            accounting rules and contributor expectations.
+            Permission-free Reddit CSV import shipped before any contribution.
+            The active 500 USDT target funds extension hardening, while this page
+            also defines the broader 10,000 USDT roadmap and accounting rules.
           </p>
         </section>
 
@@ -58,9 +58,9 @@ export default function TransparencyPage() {
               ))}
             </div>
             <p className="budget-note">
-              Delivery target: a public prototype within 7 days after this
-              milestone is fully funded. Scope and source changes are published
-              openly.
+              Delivery target: a public permission-light extension prototype
+              within 7 days after this milestone is fully funded. Scope and
+              source changes are published openly.
             </p>
           </div>
         </section>

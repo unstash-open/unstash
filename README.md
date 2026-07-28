@@ -6,17 +6,23 @@ tracking and no remote database.
 
 Live project: **https://unstash-open.vercel.app**
 
-The active public milestone is **500 USDT** for a permission-light Reddit
-saved-post import prototype. The broader **10,000 USDT** roadmap remains a
-transparent stretch plan, not a requirement to start shipping. Read
+Permission-free Reddit CSV import has shipped. The active public milestone is
+**500 USDT** for extension hardening and live-save capture. The broader
+**10,000 USDT** roadmap remains a transparent stretch plan, not a requirement
+to start shipping. Read
 [FUNDING.md](./FUNDING.md) before contributing. Launch operations and channel
 drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 [docs/CHANNEL_LAUNCH.md](./docs/CHANNEL_LAUNCH.md) and
 [docs/MILESTONE_LAUNCH.md](./docs/MILESTONE_LAUNCH.md).
 
+The [29-second demo](https://unstash-open.vercel.app/unstash-demo.mp4) uses
+AI-generated title art and a synthetic voice over real product screens. No
+camera, microphone or personal account footage is used.
+
 ## What works today
 
 - add any saved link with a `read`, `make` or `keep` action;
+- import `saved_posts.csv` and `saved_comments.csv` locally with no Reddit login;
 - search and complete queue items;
 - export the queue as Markdown;
 - keep all prototype data in browser local storage;
@@ -24,8 +30,8 @@ drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 
 ## Roadmap
 
-1. **0–500 USDT:** prototype a permission-light Reddit saved-post import.
-2. **500–2,000 USDT:** harden the browser extension and import flow.
+1. **0–500 USDT:** harden the permission-light extension and import flow.
+2. **500–2,000 USDT:** add live-save capture and cross-browser packaging.
 3. **2,000–5,000 USDT:** add useful on-device resurfacing and summaries.
 4. **5,000–10,000 USDT:** complete cross-browser QA, accessibility and v1.
 

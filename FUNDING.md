@@ -1,6 +1,6 @@
 # Unstash funding policy
 
-Active milestone: **500 USDT** for a permission-light Reddit import prototype
+Active milestone: **500 USDT** for Reddit extension hardening
 
 Stretch roadmap: **10,000 USDT**
 
@@ -28,22 +28,32 @@ of truth for TRC20 transfers and Etherscan is the source of truth for ERC20
 transfers. Transfers of other tokens or on other networks do not count toward
 the target.
 
+## Shipped before funding
+
+On **2026-07-28**, Unstash released a permission-free importer for Reddit's
+official `saved_posts.csv` and `saved_comments.csv` files before receiving any
+campaign contribution. Files are parsed locally, duplicate links are skipped
+and no Reddit account or token is requested.
+
+The project absorbed that proof-of-concept work. The active milestone budget
+below applies to the extension and reliability work that remains.
+
 ## Active milestone budget
 
 The first 500 USDT funds one narrow, testable upgrade:
 
 | Use | USDT |
 | --- | ---: |
-| Extension scaffold | 180 |
-| Saved-post import mapping | 160 |
+| Extension and live-save capture | 220 |
+| Import reliability and recovery | 100 |
 | Permission and privacy documentation | 80 |
-| Cross-browser testing | 60 |
+| Cross-browser testing | 80 |
 | Buffer | 20 |
 | **Total** | **500** |
 
-Delivery target: publish a working prototype within seven days after the active
-milestone is fully funded. This is a project target, not a purchase promise or
-financial return.
+Delivery target: publish a permission-light extension prototype within seven
+days after the active milestone is fully funded. This is a project target, not
+a purchase promise or financial return.
 
 ## Stretch roadmap budget
 

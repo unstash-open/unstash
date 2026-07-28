@@ -3,9 +3,9 @@ import { SiteHeader } from "../components/SiteHeader";
 import { VaultPrototype } from "./vault-prototype";
 
 export const metadata: Metadata = {
-  title: "Try the local-first prototype",
+  title: "Import Reddit saves locally",
   description:
-    "Add a link, choose Read, Make or Keep, and export your private queue to Markdown. No account or tracking.",
+    "Import Reddit saved-post CSV files locally, choose Read, Make or Keep, and export your private queue. No account or tracking.",
   alternates: {
     canonical: "/prototype",
   },
@@ -13,15 +13,15 @@ export const metadata: Metadata = {
     type: "website",
     title: "Unstash — turn saved links into next steps",
     description:
-      "Try the local-first queue for links you meant to use. No account, no tracking, and data stays in your browser.",
+      "Import Reddit saves into a local-first action queue. No account, no tracking, and data stays in your browser.",
     url: "/prototype",
     siteName: "Unstash",
     images: [
       {
-        url: "/og.png",
+        url: "/og-reddit-import.png",
         width: 1536,
         height: 1024,
-        alt: "Unstash — saved does not mean used",
+        alt: "Unstash — Reddit import is live, private and local-first",
       },
     ],
   },
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Unstash — turn saved links into next steps",
     description:
-      "A private, local-first queue for the links you meant to use.",
-    images: ["/og.png"],
+      "Import Reddit saves into a private, local-first action queue.",
+    images: ["/og-reddit-import.png"],
   },
 };
 
@@ -46,6 +46,7 @@ export default function PrototypePage() {
       "A private, local-first queue that turns saved links into clear next steps.",
     featureList: [
       "Read, Make and Keep action labels",
+      "Permission-free Reddit CSV import",
       "Local browser storage",
       "Queue search and completion",
       "Markdown export",
@@ -68,10 +69,11 @@ export default function PrototypePage() {
             <span className="live-dot" aria-hidden="true" />
             Working local prototype
           </div>
-          <h1>Turn a saved link into a next step.</h1>
+          <h1>Import Reddit saves without signing in.</h1>
           <p>
-            Add a link, decide what you want to do with it and keep a small
-            searchable queue. This prototype stores everything in this browser only.
+            Bring in saved posts and comments from Reddit&apos;s official CSV
+            export, choose a next action and keep a searchable queue. Everything
+            is read and stored only in this browser.
           </p>
         </section>
         <VaultPrototype />

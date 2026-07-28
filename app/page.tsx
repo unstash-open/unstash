@@ -6,13 +6,13 @@ import { SiteHeader } from "./components/SiteHeader";
 const milestones = [
   {
     amount: "0—500",
-    title: "Reddit import prototype",
-    copy: "Ship a permission-light proof of concept, document every requested permission and publish the source.",
+    title: "Extension hardening",
+    copy: "Turn the shipped local CSV importer into a permission-light extension with public permission notes and tests.",
   },
   {
     amount: "500—2K",
-    title: "Extension hardening",
-    copy: "Add reliable import/export, cross-browser packaging and safer failure recovery.",
+    title: "Live-save capture",
+    copy: "Add reliable capture, cross-browser packaging and safer failure recovery without a remote vault.",
   },
   {
     amount: "2—5K",
@@ -59,7 +59,7 @@ export default function Home() {
                 <span aria-hidden="true">↗</span>
               </Link>
               <a className="button button-ghost" href="#fund">
-                Fund the Reddit import
+                Fund extension hardening
               </a>
             </div>
             <p className="microcopy">
@@ -161,7 +161,7 @@ export default function Home() {
                   <div className="unstash-box">UNSTASH</div>
                 </div>
                 <h3>Bring it in</h3>
-                <p>Paste a link today. One-click Reddit import is the active milestone.</p>
+                <p>Paste a link or import Reddit&apos;s saved-post CSV locally today.</p>
               </article>
               <article className="workflow-card featured">
                 <span className="step-number">2</span>
@@ -192,8 +192,8 @@ export default function Home() {
                 <span className="status-pill">WORKS NOW</span>
                 <h3>The local prototype is live.</h3>
                 <p>
-                  Add links, choose an action, search your queue and export it.
-                  Everything is stored only in your browser.
+                  Import Reddit CSV files, add links, choose an action, search
+                  your queue and export it. Everything stays in your browser.
                 </p>
               </div>
               <Link className="button button-light" href="/prototype">
@@ -203,14 +203,52 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="demo-section" id="demo">
+          <div className="shell demo-layout">
+            <div className="demo-copy">
+              <div className="section-kicker">03 · THE PROOF</div>
+              <span className="status-pill">AI-PRODUCED · REAL PRODUCT UI</span>
+              <h2>See the shipped importer in 29 seconds.</h2>
+              <p>
+                The graphics and voice are synthetic. The screens and workflow
+                are the real product: import a Reddit CSV, choose an action,
+                search the queue and finish a save.
+              </p>
+              <Link className="button button-light" href="/prototype">
+                Try the importer <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="demo-player">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster="/og-reddit-import.png"
+              >
+                <source src="/unstash-demo.mp4" type="video/mp4" />
+                <track
+                  default
+                  kind="captions"
+                  src="/unstash-demo.vtt"
+                  srcLang="en"
+                  label="English"
+                />
+                Your browser does not support the demo video.
+              </video>
+              <p>29 sec · synthetic voice · captions included</p>
+            </div>
+          </div>
+        </section>
+
         <section className="funding-section shell" id="fund">
           <div className="funding-intro">
-            <div className="section-kicker">03 · THE FUND</div>
+            <div className="section-kicker">04 · THE FUND</div>
             <h2>Fund one useful upgrade.</h2>
             <p>
-              The active target is 500 USDT for a permission-light Reddit import
-              prototype. The broader 10,000 USDT roadmap stays public, but this
-              first contribution window has one job and one verifiable output.
+              The permission-free CSV importer shipped before the first
+              contribution. The active 500 USDT target now hardens it into a
+              permission-light extension. The broader 10,000 USDT roadmap stays
+              public.
             </p>
           </div>
 
@@ -218,16 +256,17 @@ export default function Home() {
             <DonationPanel />
             <div>
               <article className="active-milestone">
-                <span className="status-pill">ACTIVE MILESTONE · 01</span>
-                <h3>One-click Reddit import</h3>
+                <span className="status-pill">PROOF SHIPPED · MILESTONE 01</span>
+                <h3>From CSV to one-click capture</h3>
                 <p>
-                  A public proof of concept that imports saved posts without
-                  asking for broad account access. Source, permission notes and
-                  progress updates will be published as it ships.
+                  Local Reddit CSV import already works without an account,
+                  token or upload. Funding now covers the extension shell,
+                  minimal permissions, cross-browser tests and public privacy
+                  notes.
                 </p>
                 <div className="delivery-target">
                   <span>Target</span>
-                  <strong>Public prototype within 7 days after funding</strong>
+                  <strong>Extension prototype within 7 days after funding</strong>
                 </div>
               </article>
               <div className="milestones">
@@ -249,7 +288,7 @@ export default function Home() {
           <div className="shell">
             <div className="section-heading inverse">
               <div>
-                <div className="section-kicker">04 · THE PROMISE</div>
+                <div className="section-kicker">05 · THE PROMISE</div>
                 <h2>Trust is a feature.</h2>
               </div>
               <Link className="text-link light-link" href="/transparency">
@@ -269,7 +308,7 @@ export default function Home() {
         </section>
 
         <section className="faq-section shell" id="faq">
-          <div className="section-kicker">05 · STRAIGHT ANSWERS</div>
+          <div className="section-kicker">06 · STRAIGHT ANSWERS</div>
           <div className="faq-layout">
             <h2>Before you contribute.</h2>
             <div className="faq-list">

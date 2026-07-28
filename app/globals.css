@@ -695,6 +695,70 @@ summary {
   line-height: 1.5;
 }
 
+.demo-section {
+  padding-block: 106px;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.demo-copy .section-kicker {
+  margin-bottom: 20px;
+  color: #a9a69e;
+}
+
+.demo-copy h2 {
+  max-width: 650px;
+  margin: 22px 0;
+  font-size: clamp(44px, 6vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.demo-copy p {
+  max-width: 560px;
+  margin: 0 0 30px;
+  color: #b8b7b2;
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.demo-copy .button {
+  width: fit-content;
+}
+
+.demo-player {
+  padding: 10px;
+  border: 1px solid var(--white);
+  border-radius: 18px;
+  background: #242424;
+  box-shadow: 10px 10px 0 var(--acid);
+}
+
+.demo-player video {
+  width: 100%;
+  display: block;
+  border-radius: 11px;
+  background: #0e0e0e;
+  aspect-ratio: 16 / 9;
+}
+
+.demo-player p {
+  margin: 10px 8px 2px;
+  color: #b8b7b2;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .funding-section {
   padding-block: 112px;
 }
@@ -1303,6 +1367,117 @@ summary {
   font-size: 12px;
 }
 
+.reddit-import {
+  margin-top: 28px;
+  padding: 26px;
+  border: 1px solid var(--ink);
+  border-radius: 16px;
+  background: var(--acid);
+  box-shadow: 6px 6px 0 var(--ink);
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 42px;
+  align-items: center;
+}
+
+.reddit-import-copy h2 {
+  margin: 18px 0 10px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.reddit-import-copy p {
+  max-width: 680px;
+  margin: 0;
+  color: #41521a;
+  line-height: 1.55;
+}
+
+.reddit-import-copy ul {
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+  list-style: none;
+}
+
+.reddit-import-copy li {
+  color: #41521a;
+  font-size: 12px;
+}
+
+.reddit-import-copy li::before {
+  content: "✓";
+  margin-right: 8px;
+  font-weight: 900;
+}
+
+.reddit-import-controls {
+  padding: 18px;
+  border: 1px solid var(--ink);
+  border-radius: 13px;
+  background: var(--paper);
+}
+
+.reddit-import-controls .form-field select {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid var(--ink);
+  border-radius: 9px;
+  background: var(--white);
+}
+
+.reddit-file-button {
+  width: 100%;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.reddit-file-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.reddit-file-button:focus-within {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.reddit-export-link {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.reddit-export-link:hover {
+  color: var(--ink);
+}
+
+.reddit-import-status {
+  min-height: 33px;
+  margin: 13px 0 0;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.reddit-import-status.visible {
+  color: #2944a5;
+  font-weight: 700;
+}
+
 .vault-controls {
   margin-top: 32px;
   display: grid;
@@ -1616,6 +1791,7 @@ summary {
 
   .problem-grid,
   .section-heading,
+  .demo-layout,
   .funding-layout,
   .faq-layout,
   .transparency-grid {
@@ -1637,6 +1813,11 @@ summary {
 
   .add-form {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .reddit-import {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .vault-grid {
@@ -1716,6 +1897,7 @@ summary {
 
   .problem-section,
   .workflow-section,
+  .demo-section,
   .funding-section,
   .principles-section,
   .faq-section {
@@ -1738,6 +1920,19 @@ summary {
     padding: 25px;
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .demo-layout {
+    gap: 42px;
+  }
+
+  .demo-copy .button {
+    width: 100%;
+  }
+
+  .demo-player {
+    padding: 6px;
+    box-shadow: 6px 6px 0 var(--acid);
   }
 
   .milestone {
@@ -1800,6 +1995,10 @@ summary {
 
   .prototype-support {
     padding: 22px;
+  }
+
+  .reddit-import {
+    padding: 21px;
   }
 }
 
