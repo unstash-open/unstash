@@ -2,8 +2,9 @@
 
 Use these drafts when Reddit moderator replies are delayed. Adapt each post to
 the venue. Do not paste the same text across platforms on the same day. Product
-first; funding secondary. Never frame contributions as investment, equity,
-token sale or guaranteed delivery of later milestones.
+first; funding secondary where the venue allows it, and omitted entirely from
+Show HN. Never frame contributions as investment, equity, token sale or
+guaranteed delivery of later milestones.
 
 Preconditions before posting anywhere:
 
@@ -35,16 +36,17 @@ Current build:
 The current build also imports Reddit's official saved-post CSV locally. Not
 built yet: live-save browser extension, on-device summaries and resurfacing.
 
-Live prototype: https://unstash-open.vercel.app  
-Source: https://github.com/unstash-open/unstash
+Live prototype: https://unstash-open.vercel.app/prototype
 
-The permission-free CSV importer shipped before funding. The next milestone
-hardens it into a narrowly scoped extension; the project page shows its 500
-USDT budget and public ledger. Support is optional and is not an investment.
-Criticism of the product loop is more useful than money right now.
+Source: https://github.com/unstash-open/unstash
 
 Curious what HN thinks is the right resurfacing cadence: daily queue, weekly
 digest, or only search-when-needed?
+
+Keep the submission and thread product-only. Show HN accepts things people can
+try and explicitly excludes fundraisers and landing pages. If someone
+independently asks how development is funded, answer factually without turning
+the reply into a funding pitch.
 
 ## Indie Hackers
 
@@ -124,11 +126,16 @@ current prototype.
 Mention the voluntary funding page only in Maker comment / links, not in the
 first screenshot captions.
 
+Use at least two product gallery images. Product Hunt currently accepts launch
+videos through a public YouTube URL, so upload the AI-produced demo there before
+adding it to the gallery.
+
 ## Comment-response rules (all channels)
 
 - disclose ownership immediately;
 - answer product and technical questions first;
 - never invent users, donors or traction;
+- move people through try → feedback → optional support, in that order;
 - if funding is challenged, point to FUNDING.md and the public wallets;
 - do not argue removals—ask once, accept the answer;
 - ship a weekly update where the venue allows progress posts.

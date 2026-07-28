@@ -29,7 +29,7 @@ venue. Drafts: [CHANNEL_LAUNCH.md](./CHANNEL_LAUNCH.md).
 
 | Day | Channel | Focus |
 | --- | --- | --- |
-| 1 | Show HN | Product loop; funding one short paragraph |
+| 1 | Show HN | Direct prototype; product and feedback only |
 | 1–2 | Indie Hackers | Building in public; ask about queue cadence |
 | 2–3 | Dev.to | Longer write-up for search / long tail |
 | 3 | X / Bluesky | Demo GIF + prototype link |
@@ -41,8 +41,19 @@ Rules for every channel:
 
 - adapt the text; do not mass-paste;
 - product first, funding secondary;
+- keep Show HN entirely product-only and link directly to `/prototype`;
 - no investment / token / equity framing;
 - no unsolicited DMs or sockpuppet support.
+
+### Conversion order
+
+1. Let the visitor try the working importer without an account.
+2. Ask for one useful signal: feedback, a GitHub issue or a star.
+3. Show optional funding only after the visitor has seen the product work.
+
+Weekly public signals: substantive replies, GitHub stars, opened issues,
+confirmed contributors and shipped releases. Do not manufacture testimonials,
+donations, votes or usage numbers.
 
 ### Funding rails
 
