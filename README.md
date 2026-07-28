@@ -16,8 +16,8 @@ drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 [docs/MILESTONE_LAUNCH.md](./docs/MILESTONE_LAUNCH.md).
 
 The [29-second demo](https://unstash-open.vercel.app/unstash-demo.mp4) uses
-AI-generated title art and a synthetic voice over real product screens. No
-camera, microphone or personal account footage is used.
+AI-generated title art and a natural conversational AI voice over real product
+screens. No camera, microphone or personal account footage is used.
 
 ## What works today
 

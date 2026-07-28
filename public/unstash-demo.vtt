@@ -1,19 +1,19 @@
 WEBVTT
 
 00:00.000 --> 00:03.600
-Saved posts are easy to collect and hard to use.
+Saved posts are easy to collect — and surprisingly hard to use.
 
 00:03.600 --> 00:09.200
-Unstash imports Reddit's official saved-post CSV directly in your browser.
+Unstash imports your official Reddit saved-post CSV, right in the browser.
 
 00:09.200 --> 00:13.800
-No Reddit login. No OAuth token. No upload.
+No Reddit login. No OAuth token. Nothing gets uploaded.
 
 00:13.800 --> 00:19.400
-Choose an action, search the queue, finish an item, and export to Markdown.
+Pick an action. Search your queue. Finish an item. Then export to Markdown.
 
 00:19.400 --> 00:24.000
-The CSV importer is live. Next: a permission-light browser extension.
+The CSV importer is live. Next: a lightweight browser extension.
 
 00:24.000 --> 00:29.000
-Open source. Private by default. Try it now.
+Open source, private by default, and ready to try.

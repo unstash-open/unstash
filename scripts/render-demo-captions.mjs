@@ -9,21 +9,21 @@ if (!outputDirectory) {
 }
 
 const captions = [
-  ["Saved posts are easy to collect and hard to use."],
+  ["Saved posts are easy to collect —", "and surprisingly hard to use."],
   [
-    "Unstash imports Reddit’s official saved-post CSV",
-    "directly in your browser.",
+    "Unstash imports your official Reddit saved-post CSV,",
+    "right in the browser.",
   ],
-  ["No Reddit login. No OAuth token. No upload."],
+  ["No Reddit login. No OAuth token.", "Nothing gets uploaded."],
   [
-    "Choose an action, search the queue, finish an item,",
-    "and export to Markdown.",
+    "Pick an action. Search your queue. Finish an item.",
+    "Then export to Markdown.",
   ],
   [
     "The CSV importer is live.",
-    "Next: a permission-light browser extension.",
+    "Next: a lightweight browser extension.",
   ],
-  ["Open source. Private by default. Try it now."],
+  ["Open source, private by default,", "and ready to try."],
 ];
 
 await fs.mkdir(outputDirectory, { recursive: true });

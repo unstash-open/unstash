@@ -9,7 +9,7 @@ project_dir="$(cd "$script_dir/.." && pwd)"
 title_card="$(cd "$(dirname "$title_card_input")" && pwd)/$(basename "$title_card_input")"
 frame_dir="$(cd "$frame_dir_input" && pwd)"
 output="$(cd "$(dirname "$output_input")" && pwd)/$(basename "$output_input")"
-voiceover="$frame_dir/voiceover.aiff"
+voiceover="$frame_dir/voiceover.mp3"
 captions="public/unstash-demo.vtt"
 
 test -f "$title_card"
@@ -32,8 +32,6 @@ ffmpeg -y \
   -loop 1 -framerate 24 -t 5 -i "$frame_dir/06-search.png" \
   -loop 1 -framerate 24 -t 5 -i "$title_card" \
   -i "$voiceover" \
-  -f lavfi -t 29 -i "sine=frequency=180:sample_rate=48000" \
-  -f lavfi -t 29 -i "anoisesrc=color=pink:sample_rate=48000:amplitude=0.02" \
   -loop 1 -framerate 24 -t 29 -i "$frame_dir/caption-01.png" \
   -loop 1 -framerate 24 -t 29 -i "$frame_dir/caption-02.png" \
   -loop 1 -framerate 24 -t 29 -i "$frame_dir/caption-03.png" \
@@ -52,16 +50,13 @@ ffmpeg -y \
     [x2][v3]xfade=transition=fade:duration=0.4:offset=13.8[x3];
     [x3][v4]xfade=transition=fade:duration=0.4:offset=19.4[x4];
     [x4][v5]xfade=transition=fade:duration=0.4:offset=24.0[x5];
-    [x5][9:v]overlay=0:0:enable='between(t,0,3.6)'[c1];
-    [c1][10:v]overlay=0:0:enable='between(t,3.6,9.2)'[c2];
-    [c2][11:v]overlay=0:0:enable='between(t,9.2,13.8)'[c3];
-    [c3][12:v]overlay=0:0:enable='between(t,13.8,19.4)'[c4];
-    [c4][13:v]overlay=0:0:enable='between(t,19.4,24)'[c5];
-    [c5][14:v]overlay=0:0:enable='between(t,24,29)'[video];
-    [6:a]atempo=0.9,volume=1.35[voice];
-    [7:a]volume=0.018,lowpass=f=700[tone];
-    [8:a]volume=0.008,lowpass=f=1200[noise];
-    [voice][tone][noise]amix=inputs=3:duration=longest:dropout_transition=2,loudnorm=I=-16:TP=-1.5:LRA=11[audio]
+    [x5][7:v]overlay=0:0:enable='between(t,0,3.6)'[c1];
+    [c1][8:v]overlay=0:0:enable='between(t,3.6,9.2)'[c2];
+    [c2][9:v]overlay=0:0:enable='between(t,9.2,13.8)'[c3];
+    [c3][10:v]overlay=0:0:enable='between(t,13.8,19.4)'[c4];
+    [c4][11:v]overlay=0:0:enable='between(t,19.4,24)'[c5];
+    [c5][12:v]overlay=0:0:enable='between(t,24,29)'[video];
+    [6:a]aresample=48000,volume=1.05,apad,atrim=duration=29,loudnorm=I=-16:TP=-1.5:LRA=11[audio]
   " \
   -map "[video]" \
   -map "[audio]" \

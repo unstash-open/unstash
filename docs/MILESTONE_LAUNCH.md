@@ -8,8 +8,8 @@ unsolicited messages.
 ## AI-produced 29-second demo
 
 The project demo is generated from the real product UI, synthetic motion,
-captions and text-to-speech. It contains no personal tabs, account names,
-bookmarks, camera footage or wallet software.
+captions and an Ava conversational AI voice. It contains no personal tabs,
+account names, bookmarks, camera footage or wallet software.
 
 Video: https://unstash-open.vercel.app/unstash-demo.mp4
 
