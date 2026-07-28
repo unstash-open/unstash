@@ -1,0 +1,91 @@
+name: Release Unstash Capture
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        required: true
+        default: v0.1.0
+      target_sha:
+        description: Full commit SHA containing the release asset
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      ASSET_NAME: unstash-extension-v0.1.0.zip
+      EXPECTED_SHA256: da13e0648f3984556144bb281346c8bb26c55f565cae7d06a70ac1d15ba326d3
+      RELEASE_TITLE: Unstash Capture 0.1
+      TAG: ${{ inputs.tag }}
+      TARGET_SHA: ${{ inputs.target_sha }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file -e "${TARGET_SHA}^{commit}"
+          test "$(git rev-parse "${TARGET_SHA}^{commit}")" = "${TARGET_SHA}"
+
+          git show "${TARGET_SHA}:public/${ASSET_NAME}" > "/tmp/${ASSET_NAME}"
+          actual_sha256="$(sha256sum "/tmp/${ASSET_NAME}" | cut -d' ' -f1)"
+          test "${actual_sha256}" = "${EXPECTED_SHA256}"
+
+          git show "${TARGET_SHA}:extension/manifest.json" > /tmp/manifest.json
+          node -e '
+            const manifest = require("/tmp/manifest.json");
+            const permissions = manifest.permissions || [];
+            if (
+              JSON.stringify(permissions) !== JSON.stringify(["activeTab"]) ||
+              manifest.host_permissions ||
+              manifest.background ||
+              manifest.content_scripts
+            ) {
+              throw new Error("Unexpected extension permissions");
+            }
+          '
+
+          git show "${TARGET_SHA}:docs/EXTENSION_0.1.md" > /tmp/release-notes.md
+
+      - name: Create or verify tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+            test "$(git rev-list -n 1 "${TAG}")" = "${TARGET_SHA}"
+          else
+            git \
+              -c user.name="Unstash Release Bot" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              tag -a "${TAG}" "${TARGET_SHA}" -m "${RELEASE_TITLE}"
+            git push origin "refs/tags/${TAG}"
+          fi
+
+      - name: Publish GitHub Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            gh release edit "${TAG}" \
+              --title "${RELEASE_TITLE}" \
+              --notes-file /tmp/release-notes.md
+            gh release upload "${TAG}" \
+              "/tmp/${ASSET_NAME}#Chromium developer preview" \
+              --clobber
+          else
+            gh release create "${TAG}" \
+              "/tmp/${ASSET_NAME}#Chromium developer preview" \
+              --title "${RELEASE_TITLE}" \
+              --notes-file /tmp/release-notes.md \
+              --verify-tag
+          fi
