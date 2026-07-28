@@ -9,11 +9,11 @@ export function SiteHeader() {
           <span>unstash</span>
         </Link>
         <nav className="nav-links" aria-label="Primary navigation">
-          <Link href="/#project">Project</Link>
-          <Link href="/transparency">Transparency</Link>
-          <Link href="/prototype">Prototype</Link>
+          <Link href="/#demo">Demo</Link>
           <Link href="/extension">Extension</Link>
-          <Link className="nav-cta" href="/#fund">Fund the build</Link>
+          <Link href="/#test">Test it</Link>
+          <Link href="/transparency">Transparency</Link>
+          <Link className="nav-cta" href="/prototype">Try Unstash</Link>
         </nav>
       </div>
     </header>

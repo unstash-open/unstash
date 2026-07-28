@@ -56,6 +56,10 @@ Weekly public signals: substantive replies, GitHub stars, opened issues,
 confirmed contributors and shipped releases. Do not manufacture testimonials,
 donations, votes or usage numbers.
 
+Page-level traffic is measured with cookie-free Vercel Web Analytics. Review
+only aggregate visits, route views and referrers. Never add saved links, queue
+contents, wallet data or other personal information to analytics events.
+
 ### Funding rails
 
 - Permission-free Reddit CSV import and extension 0.1 shipped before funding.

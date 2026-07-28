@@ -759,6 +759,84 @@ summary {
   text-transform: uppercase;
 }
 
+.tester-section {
+  padding-block: 112px;
+}
+
+.tester-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 74px;
+  align-items: end;
+}
+
+.tester-heading h2 {
+  max-width: 760px;
+  margin: 22px 0 0;
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.tester-intro p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.tester-steps {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+
+.tester-steps article {
+  min-height: 240px;
+  padding: 22px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.tester-steps article > span {
+  color: var(--coral);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.tester-steps h3 {
+  margin: auto 0 10px;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.tester-steps p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.tester-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.tester-actions > p {
+  flex: 1 1 260px;
+  margin: 0 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .funding-section {
   padding-block: 112px;
 }
@@ -1259,9 +1337,17 @@ summary {
 }
 
 .footer-copy {
-  margin: 0;
+  margin: 0 0 5px;
   color: #5f5527;
   font-size: 12px;
+}
+
+.footer-privacy {
+  max-width: 520px;
+  margin: 0;
+  color: #75682d;
+  font-size: 10px;
+  line-height: 1.45;
 }
 
 .footer-links {
@@ -2035,7 +2121,7 @@ summary {
 .policy-stack {
   margin-top: 70px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
 
@@ -2082,6 +2168,7 @@ summary {
   .problem-grid,
   .section-heading,
   .demo-layout,
+  .tester-heading,
   .funding-layout,
   .faq-layout,
   .transparency-grid {
@@ -2132,6 +2219,10 @@ summary {
 
   .extension-facts {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .tester-steps {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2203,6 +2294,7 @@ summary {
   .problem-section,
   .workflow-section,
   .demo-section,
+  .tester-section,
   .funding-section,
   .principles-section,
   .faq-section {
@@ -2238,6 +2330,24 @@ summary {
   .demo-player {
     padding: 6px;
     box-shadow: 6px 6px 0 var(--acid);
+  }
+
+  .tester-heading {
+    gap: 34px;
+  }
+
+  .tester-steps article {
+    min-height: 190px;
+  }
+
+  .tester-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tester-actions > p {
+    flex-basis: auto;
+    margin: 4px 0 0;
   }
 
   .milestone {

@@ -1,8 +1,8 @@
 # Unstash
 
 Unstash is a local-first queue for turning saved posts and links into concrete
-next steps. The current prototype runs entirely in the browser: no account, no
-tracking and no remote database.
+next steps. The current prototype runs entirely in the browser with no account
+or remote queue database.
 
 Live project: **https://unstash-open.vercel.app**
 
@@ -57,9 +57,12 @@ Cloudflare Worker runtime.
 ## Privacy
 
 The prototype stores items under `unstash-prototype-v1` in local storage. It
-does not submit saved links to an application server. The only automatic
-external request is the read-only campaign total endpoint, which queries public
-blockchain data.
+does not submit saved links to an application server. The public site uses
+cookie-free Vercel Web Analytics for anonymous route-level page counts and
+referrers. Query strings and URL fragments are removed before page-view events
+are sent; no custom event properties, saved links or queue contents are
+collected. The campaign panel also calls the read-only total endpoint, which
+queries public blockchain data.
 
 Extension 0.1 requests only `activeTab`. It passes the selected tab to the
 prototype in a URL fragment; fragments are not included in HTTP requests and

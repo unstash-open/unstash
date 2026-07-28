@@ -28,15 +28,17 @@ test("server-renders the Unstash campaign page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /Saved/);
-  assert.match(html, /Unstash turns forgotten saved posts/);
+  assert.match(html, /One tab/);
+  assert.match(html, /Capture the current tab or import your Reddit saves/);
   assert.match(html, /Fund one useful upgrade/);
   assert.match(html, /From developer preview to cross-browser release/);
   assert.match(html, /500 USDT/);
   assert.match(html, /10,000 USDT/);
-  assert.match(html, /Try the working prototype/);
-  assert.match(html, /Get extension 0\.1/);
+  assert.match(html, /Try it in 30 seconds/);
+  assert.match(html, /Install extension 0\.1/);
   assert.match(html, /See the private workflow in 29 seconds/);
+  assert.match(html, /Five honest tests beat five thousand impressions/);
+  assert.match(html, /Report what broke/);
   assert.match(html, /\/unstash-demo\.mp4/);
   assert.match(html, /synthetic voice/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
