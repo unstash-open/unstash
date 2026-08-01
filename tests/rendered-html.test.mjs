@@ -1,14 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-async function render(pathname = "/") {
+async function render(pathname = "/", init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
+  const headers = new Headers(init.headers);
+  if (!headers.has("accept")) headers.set("accept", "text/html");
+
   return worker.fetch(
     new Request(`http://localhost${pathname}`, {
-      headers: { accept: "text/html" },
+      ...init,
+      headers,
     }),
     {
       ASSETS: {
@@ -82,4 +86,76 @@ test("server-renders the beta, prototype, extension and transparency pages", asy
   assert.match(transparencyHtml, /Active milestone/);
   assert.match(transparencyHtml, /Cross-browser packaging/);
   assert.match(transparencyHtml, /Core product development/);
+});
+
+test("server-renders the paid repository audit funnel", async () => {
+  const [landing, intake, success, terms, privacy] = await Promise.all([
+    render("/security-audit"),
+    render("/security-audit/intake?plan=standard"),
+    render("/security-audit/success"),
+    render("/security-audit/terms"),
+    render("/security-audit/privacy"),
+  ]);
+
+  for (const response of [landing, intake, success, terms, privacy]) {
+    assert.equal(response.status, 200);
+  }
+
+  const [landingHtml, intakeHtml, successHtml, termsHtml, privacyHtml] = await Promise.all([
+    landing.text(),
+    intake.text(),
+    success.text(),
+    terms.text(),
+    privacy.text(),
+  ]);
+
+  assert.match(landingHtml, /Ship with fewer/);
+  assert.match(landingHtml, /Book the \$490 audit/);
+  assert.match(landingHtml, /Standard Repository Audit/);
+  assert.match(landingHtml, /Managed Security Monitor/);
+  assert.match(landingHtml, /Payment does not authorize testing/);
+  assert.match(intakeHtml, /Confirm the repository and authorization/);
+  assert.match(intakeHtml, /Standard Repository Audit/);
+  assert.match(intakeHtml, /<strong>\$950<\/strong>/);
+  assert.match(intakeHtml, /action="\/api\/security-audit\/checkout"/);
+  assert.match(intakeHtml, /name="authorization"/);
+  assert.match(intakeHtml, /name="terms"/);
+  assert.match(successHtml, /Next: scope verification/);
+  assert.match(termsHtml, /Payment is not authorization/);
+  assert.match(privacyHtml, /does not receive the full card number/);
+  assert.doesNotMatch(landingHtml, /STRIPE_SECRET_KEY|STRIPE_WEBHOOK_SECRET|sk_(?:test|live)_/);
+});
+
+test("audit checkout rejects unauthorized or malformed submissions before Stripe", async () => {
+  const missingAuthorization = new URLSearchParams({
+    plan: "beta",
+    email: "owner@example.com",
+    repository: "https://github.com/example/project",
+    terms: "accepted",
+  });
+  const malformedRepository = new URLSearchParams({
+    plan: "beta",
+    email: "owner@example.com",
+    repository: "https://example.com/not-github",
+    authorization: "confirmed",
+    terms: "accepted",
+  });
+
+  const [unauthorizedResponse, malformedResponse] = await Promise.all([
+    render("/api/security-audit/checkout", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: missingAuthorization,
+    }),
+    render("/api/security-audit/checkout", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: malformedRepository,
+    }),
+  ]);
+
+  assert.equal(unauthorizedResponse.status, 400);
+  assert.equal(malformedResponse.status, 400);
+  assert.match((await unauthorizedResponse.json()).error, /authorization/i);
+  assert.match((await malformedResponse.json()).error, /github\.com/i);
 });

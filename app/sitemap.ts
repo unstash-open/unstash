@@ -35,5 +35,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${PROJECT.siteUrl}/security-audit`,
+      lastModified: releasedAt,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
   ];
 }

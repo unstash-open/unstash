@@ -18,6 +18,11 @@ drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 Extension permissions, limits and the release checksum are recorded in
 [docs/EXTENSION_0.1.md](./docs/EXTENSION_0.1.md).
 
+The repository also includes a separately scoped, paid repository security
+review at `/security-audit`. Checkout, authorization boundaries and fulfillment
+operations are documented in
+[docs/SECURITY_AUDIT_REVENUE.md](./docs/SECURITY_AUDIT_REVENUE.md).
+
 The [29-second demo](https://unstash-open.vercel.app/unstash-demo.mp4) uses
 AI-generated title art and a natural conversational AI voice over real product
 screens. No camera, microphone or personal account footage is used.
