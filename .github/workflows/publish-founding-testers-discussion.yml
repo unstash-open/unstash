@@ -1,0 +1,70 @@
+name: Publish founding testers discussion
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  discussions: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY_ID: R_kgDOThYD8w
+      CATEGORY_ID: DIC_kwDOThYD884DCbU6
+      DISCUSSION_TITLE: "Founding testers: is activeTab acceptable, or should Unstash stay CSV-only?"
+    steps:
+      - name: Create the discussion once
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          existing_url="$(
+            gh api graphql \
+              -f query='query($repositoryId:ID!){node(id:$repositoryId){... on Repository{discussions(first:100){nodes{title url}}}}}' \
+              -F repositoryId="${REPOSITORY_ID}" \
+              | jq -r --arg title "${DISCUSSION_TITLE}" \
+                '.data.node.discussions.nodes[] | select(.title == $title) | .url' \
+              | head -n 1
+          )"
+
+          if [[ -n "${existing_url}" ]]; then
+            echo "Discussion already exists: ${existing_url}" >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
+          fi
+
+          discussion_body="$(cat <<'MARKDOWN'
+          Unstash is a local-first queue for turning saved links into a clear next step: **Read**, **Make**, or **Keep**.
+
+          The current Chromium preview uses one permission: `activeTab`. It has no host permissions, content script, or background service. There is also a permission-free Reddit CSV import for people who prefer not to install an extension.
+
+          Try the smallest path that fits you:
+
+          - [Open the browser prototype](https://unstash-open.vercel.app/prototype)
+          - [Inspect or install Chromium extension 0.1](https://unstash-open.vercel.app/extension)
+          - [Watch the AI-produced demo](https://unstash-open.vercel.app/unstash-demo.mp4)
+          - [Review the source and release](https://github.com/unstash-open/unstash/releases/tag/v0.1.0)
+
+          Please reply with one choice:
+
+          1. `activeTab` is acceptable.
+          2. CSV-only feels safer.
+          3. I am not sure yet.
+
+          Then add the **first confusing, broken, or unnecessary thing** you noticed. Five concrete independent tests are more useful than general praise. Please do not paste private URLs, export contents, or other personal data.
+          MARKDOWN
+          )"
+
+          discussion_url="$(
+            gh api graphql \
+              -f query='mutation($repositoryId:ID!,$categoryId:ID!,$title:String!,$body:String!){createDiscussion(input:{repositoryId:$repositoryId,categoryId:$categoryId,title:$title,body:$body}){discussion{url}}}' \
+              -F repositoryId="${REPOSITORY_ID}" \
+              -F categoryId="${CATEGORY_ID}" \
+              -f title="${DISCUSSION_TITLE}" \
+              -f body="${discussion_body}" \
+              --jq '.data.createDiscussion.discussion.url'
+          )"
+
+          echo "Published: ${discussion_url}" >> "${GITHUB_STEP_SUMMARY}"
