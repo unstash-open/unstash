@@ -35,9 +35,9 @@ const principles = [
 ];
 
 const testerSteps = [
-  ["01", "Try one real save", "Capture a tab or import Reddit CSV, then choose Read, Make or Keep."],
-  ["02", "Say what felt wrong", "Report the first confusing step, broken edge or permission concern."],
-  ["03", "Shape the next release", "Tell us whether activeTab is acceptable or CSV-only feels safer."],
+  ["01", "Bring one real save", "Paste a link, capture a tab or import Reddit CSV, then choose Read, Make or Keep."],
+  ["02", "Finish one next step", "Open the saved link, do the smallest useful action and mark it Done."],
+  ["03", "Give one honest signal", "Choose useful, not yet or privacy concern. No account and no essay required."],
 ];
 
 export default function Home() {
@@ -49,7 +49,7 @@ export default function Home() {
           <div className="hero-copy">
             <div className="eyebrow">
               <span className="live-dot" aria-hidden="true" />
-              Live tool · Chromium extension 0.1
+              14-day activation test · live now
             </div>
             <h1>
               One tab.
@@ -61,8 +61,8 @@ export default function Home() {
               Read, Make or Keep, then act on it from a private local queue.
             </p>
             <div className="hero-actions">
-              <Link className="button button-dark" href="/prototype">
-                Try it in 30 seconds
+              <Link className="button button-dark" href="/beta">
+                Run the 5-minute test
                 <span aria-hidden="true">↗</span>
               </Link>
               <Link className="button button-ghost" href="/extension">
@@ -70,8 +70,8 @@ export default function Home() {
               </Link>
             </div>
             <p className="microcopy">
-              No account, cookies or remote vault. Saved links stay on this
-              device; only anonymous route-level page counts are collected.
+              No signup, cookies or remote vault. The test records only
+              anonymous route-level progress; saved links stay on this device.
             </p>
           </div>
 
@@ -252,15 +252,15 @@ export default function Home() {
         <section className="tester-section shell" id="test">
           <div className="tester-heading">
             <div>
-              <div className="section-kicker">04 · FOUNDING TESTERS</div>
-              <h2>Five honest tests beat five thousand impressions.</h2>
+              <div className="section-kicker">04 · 14-DAY BETA</div>
+              <h2>Prove one save can become one finished action.</h2>
             </div>
             <div className="tester-intro">
-              <span className="status-pill">OPEN CALL · 5 TEST NOTES</span>
+              <span className="status-pill">NO WAITLIST · NO ACCOUNT</span>
               <p>
-                Use Unstash once with a real link. No praise is required. The
-                useful contribution is the first thing that feels confusing,
-                unsafe or unnecessary.
+                This is an activation test, not a launch. The target is five
+                independent starts, three completed saves and two honest
+                “worth resurfacing” signals before more features are built.
               </p>
             </div>
           </div>
@@ -274,8 +274,8 @@ export default function Home() {
             ))}
           </div>
           <div className="tester-actions">
-            <Link className="button button-dark" href="/prototype">
-              Test the local queue <span aria-hidden="true">→</span>
+            <Link className="button button-dark" href="/beta">
+              Start the guided test <span aria-hidden="true">→</span>
             </Link>
             <a
               className="button button-ghost"

@@ -1,5 +1,18 @@
 # Launch operations
 
+## Current stage — activation before distribution
+
+From 2026-08-01 through 2026-08-15, the operating plan is the bounded
+[14-day activation test](./BETA_14_DAY.md). The primary route is `/beta`; a
+guided start is `/beta/run`, and the three result routes provide aggregate
+completion signals. Do not add features or widen the funding push until the
+pass / pause rule has evidence.
+
+Reddit publishing is paused while u/East_Mode_7908 remains restricted and its
+appeal is unresolved. The Product Hunt account was deleted and must not be
+recreated. Neither platform is a blocker for running the product test through
+allowed direct links and GitHub.
+
 ## Before public launch
 
 - [x] Record both public receiving addresses.
@@ -34,7 +47,7 @@ venue. Drafts: [CHANNEL_LAUNCH.md](./CHANNEL_LAUNCH.md).
 | 1–2 | Indie Hackers | Building in public; ask about queue cadence |
 | 2–3 | Dev.to | Longer write-up for search / long tail |
 | 3 | X / Bluesky | Demo GIF + prototype link |
-| 4–5 | Product Hunt | Only if source + short demo are ready |
+| 4–5 | Direct beta link | Share only where project tests are explicitly allowed |
 | ongoing | Weekly update | Site / README / allowed venues |
 | when replied | Reddit | Use [REDDIT_LAUNCH.md](./REDDIT_LAUNCH.md) after mod OK |
 
@@ -49,7 +62,8 @@ Rules for every channel:
 ### Conversion order
 
 1. Let the visitor try the working importer or install extension 0.1.
-2. Ask for one useful signal: feedback, a GitHub issue or a star.
+2. Ask for one useful signal through the guided beta result routes; detailed
+   GitHub feedback remains optional.
 3. Show optional funding only after the visitor has seen the product work.
 
 Weekly public signals: substantive replies, GitHub stars, opened issues,
@@ -57,8 +71,9 @@ confirmed contributors and shipped releases. Do not manufacture testimonials,
 donations, votes or usage numbers.
 
 Page-level traffic is measured with cookie-free Vercel Web Analytics. Review
-only aggregate visits, route views and referrers. Never add saved links, queue
-contents, wallet data or other personal information to analytics events.
+only aggregate visits, route views and referrers for `/beta`, `/beta/run` and
+the result routes. Never add saved links, queue contents, wallet data or other
+personal information to analytics events.
 
 ### Funding rails
 

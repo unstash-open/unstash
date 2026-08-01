@@ -82,7 +82,7 @@ function isVaultItem(value: unknown): value is VaultItem {
   );
 }
 
-export function VaultPrototype() {
+export function VaultPrototype({ guided = false }: { guided?: boolean }) {
   const [items, setItems] = useState<VaultItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const [url, setUrl] = useState("");
@@ -95,6 +95,7 @@ export function VaultPrototype() {
   const [didCapture, setDidCapture] = useState(false);
   const [query, setQuery] = useState("");
   const [didExport, setDidExport] = useState(false);
+  const [betaMode, setBetaMode] = useState(guided);
 
   useEffect(() => {
     const loadTimer = window.setTimeout(() => {
@@ -107,6 +108,10 @@ export function VaultPrototype() {
       } catch {
         loadedItems = [];
       }
+
+      setBetaMode(
+        guided || new URLSearchParams(window.location.search).get("beta") === "1",
+      );
 
       if (window.location.hash.startsWith(CAPTURE_HASH_PREFIX)) {
         const result = decodeCaptureHash(window.location.hash);
@@ -151,7 +156,7 @@ export function VaultPrototype() {
     }, 0);
 
     return () => window.clearTimeout(loadTimer);
-  }, []);
+  }, [guided]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -284,8 +289,94 @@ export function VaultPrototype() {
     items.length >= 3 ||
     items.some((item) => item.completed);
 
+  const betaHasSave = items.length > 0;
+  const betaHasCompletedSave = items.some((item) => item.completed);
+
+  const loadExampleQueue = () => {
+    setItems(examples);
+  };
+
+  const toggleCompleted = (id: string) => {
+    setItems((current) =>
+      current.map((candidate) =>
+        candidate.id === id
+          ? { ...candidate, completed: !candidate.completed }
+          : candidate,
+      ),
+    );
+  };
+
   return (
     <>
+      {betaMode ? (
+        <section className="beta-guide" aria-labelledby="beta-guide-title">
+          <div className="beta-guide-heading">
+            <div>
+              <span className="status-pill">5-MINUTE BETA · LOCAL ONLY</span>
+              <h2 id="beta-guide-title">Finish one save, then answer once.</h2>
+            </div>
+            <Link className="text-link" href="/prototype">
+              Leave guided mode
+            </Link>
+          </div>
+          <ol className="beta-progress">
+            <li className={betaHasSave ? "complete" : "current"}>
+              <span>{betaHasSave ? "✓" : "1"}</span>
+              <div>
+                <strong>Add one real save</strong>
+                <small>Paste, capture or import it.</small>
+              </div>
+            </li>
+            <li
+              className={
+                betaHasCompletedSave
+                  ? "complete"
+                  : betaHasSave
+                    ? "current"
+                    : ""
+              }
+            >
+              <span>{betaHasCompletedSave ? "✓" : "2"}</span>
+              <div>
+                <strong>Do the next step</strong>
+                <small>Open the link, act, then press Done.</small>
+              </div>
+            </li>
+            <li className={betaHasCompletedSave ? "current" : ""}>
+              <span>3</span>
+              <div>
+                <strong>Give one signal</strong>
+                <small>No account or written review.</small>
+              </div>
+            </li>
+          </ol>
+
+          {betaHasCompletedSave ? (
+            <div className="beta-question">
+              <div>
+                <span className="status-pill">FINAL QUESTION</span>
+                <h3>Was this save worth resurfacing?</h3>
+                <p>
+                  Your choice opens a result route. Analytics counts that page,
+                  but never receives the saved URL, title or queue contents.
+                </p>
+              </div>
+              <div className="beta-answer-grid">
+                <Link href="/beta/useful">Yes, it became useful</Link>
+                <Link href="/beta/not-yet">Not yet</Link>
+                <Link href="/beta/privacy">I have a privacy concern</Link>
+              </div>
+            </div>
+          ) : (
+            <p className="beta-guide-note">
+              {betaHasSave
+                ? "Next: finish the smallest useful action and mark that card Done."
+                : "Start below with a real save. The sample queue is available if you only want to inspect the interface."}
+            </p>
+          )}
+        </section>
+      ) : null}
+
       {captureMessage ? (
         <div className="capture-result" role="status">
           <span className="status-pill">
@@ -419,7 +510,7 @@ export function VaultPrototype() {
             <button
               className="small-button"
               type="button"
-              onClick={() => setItems(examples)}
+              onClick={loadExampleQueue}
             >
               Load example
             </button>
@@ -481,15 +572,7 @@ export function VaultPrototype() {
                   <button
                     className="done-toggle"
                     type="button"
-                    onClick={() =>
-                      setItems((current) =>
-                        current.map((candidate) =>
-                          candidate.id === item.id
-                            ? { ...candidate, completed: !candidate.completed }
-                            : candidate,
-                        ),
-                      )
-                    }
+                    onClick={() => toggleCompleted(item.id)}
                   >
                     {item.completed ? "Reopen" : "Done"}
                   </button>
@@ -510,7 +593,7 @@ export function VaultPrototype() {
                 <button
                   className="button button-dark"
                   type="button"
-                  onClick={() => setItems(examples)}
+                  onClick={loadExampleQueue}
                 >
                   Load example queue
                 </button>

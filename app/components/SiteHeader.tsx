@@ -11,9 +11,9 @@ export function SiteHeader() {
         <nav className="nav-links" aria-label="Primary navigation">
           <Link href="/#demo">Demo</Link>
           <Link href="/extension">Extension</Link>
-          <Link href="/#test">Test it</Link>
+          <Link href="/beta">5-min Beta</Link>
           <Link href="/transparency">Transparency</Link>
-          <Link className="nav-cta" href="/prototype">Try Unstash</Link>
+          <Link className="nav-cta" href="/beta">Run the test</Link>
         </nav>
       </div>
     </header>

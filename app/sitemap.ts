@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { PROJECT } from "../lib/project";
 
-const releasedAt = new Date("2026-07-28T14:09:02.000Z");
+const releasedAt = new Date("2026-08-01T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -10,6 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: releasedAt,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: `${PROJECT.siteUrl}/beta`,
+      lastModified: releasedAt,
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
     {
       url: `${PROJECT.siteUrl}/prototype`,

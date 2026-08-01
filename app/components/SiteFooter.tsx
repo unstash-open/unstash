@@ -19,6 +19,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="footer-links">
+          <Link href="/beta">5-minute beta</Link>
           <Link href="/prototype">Prototype</Link>
           <Link href="/extension">Extension 0.1</Link>
           <a href={PROJECT.releaseUrl} target="_blank" rel="noreferrer">

@@ -34,31 +34,42 @@ test("server-renders the Unstash campaign page", async () => {
   assert.match(html, /From developer preview to cross-browser release/);
   assert.match(html, /500 USDT/);
   assert.match(html, /10,000 USDT/);
-  assert.match(html, /Try it in 30 seconds/);
+  assert.match(html, /Run the 5-minute test/);
   assert.match(html, /Install extension 0\.1/);
   assert.match(html, /See the private workflow in 29 seconds/);
-  assert.match(html, /Five honest tests beat five thousand impressions/);
+  assert.match(html, /Prove one save can become one finished action/);
   assert.match(html, /Report what broke/);
   assert.match(html, /\/unstash-demo\.mp4/);
   assert.match(html, /synthetic voice/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("server-renders the prototype, extension and transparency pages", async () => {
-  const [prototype, extension, transparency] = await Promise.all([
+test("server-renders the beta, prototype, extension and transparency pages", async () => {
+  const [beta, betaRun, prototype, extension, transparency] = await Promise.all([
+    render("/beta"),
+    render("/beta/run"),
     render("/prototype"),
     render("/extension"),
     render("/transparency"),
   ]);
+  assert.equal(beta.status, 200);
+  assert.equal(betaRun.status, 200);
   assert.equal(prototype.status, 200);
   assert.equal(extension.status, 200);
   assert.equal(transparency.status, 200);
 
-  const [prototypeHtml, extensionHtml, transparencyHtml] = await Promise.all([
+  const [betaHtml, betaRunHtml, prototypeHtml, extensionHtml, transparencyHtml] = await Promise.all([
+    beta.text(),
+    betaRun.text(),
     prototype.text(),
     extension.text(),
     transparency.text(),
   ]);
+  assert.match(betaHtml, /Turn one forgotten save into one finished action/);
+  assert.match(betaHtml, /Start with one real save/);
+  assert.match(betaHtml, /\/beta\/run/);
+  assert.match(betaRunHtml, /Use one real save\. Finish one real action/);
+  assert.match(betaRunHtml, /Finish one save, then answer once/);
   assert.match(prototypeHtml, /Working local prototype/);
   assert.match(prototypeHtml, /Import Reddit saves without signing in/);
   assert.match(prototypeHtml, /SHIPPED · PERMISSION-FREE/);
