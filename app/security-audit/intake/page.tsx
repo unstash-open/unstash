@@ -16,7 +16,7 @@ type IntakePageProps = {
 
 const statusMessages: Record<string, string> = {
   cancelled: "Checkout was cancelled. Your repository has not been queued or charged.",
-  "checkout-error": "Stripe could not start checkout. Please try again in a moment.",
+  "checkout-error": "Polar could not start checkout. Please try again in a moment.",
   "checkout-unavailable": "Checkout is being connected. No payment was taken; contact us before sharing private access.",
   received: "Request received. Automated submissions are not processed.",
 };
@@ -127,7 +127,7 @@ export default async function SecurityAuditIntakePage({ searchParams }: IntakePa
               Continue to secure checkout <span aria-hidden="true">→</span>
             </button>
             <p className="audit-form-footnote">
-              Payment is processed by Stripe. We never receive your card number.
+              Payment is processed by Polar as merchant of record. We never receive your card number.
               See the <Link href="/security-audit/privacy">privacy notice</Link>.
             </p>
           </form>

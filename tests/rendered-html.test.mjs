@@ -123,10 +123,11 @@ test("server-renders the paid repository audit funnel", async () => {
   assert.match(successHtml, /Next: scope verification/);
   assert.match(termsHtml, /Payment is not authorization/);
   assert.match(privacyHtml, /does not receive the full card number/);
-  assert.doesNotMatch(landingHtml, /STRIPE_SECRET_KEY|STRIPE_WEBHOOK_SECRET|sk_(?:test|live)_/);
+  assert.match(intakeHtml, /Payment is processed by Polar/);
+  assert.doesNotMatch(landingHtml, /POLAR_WEBHOOK_SECRET|polar_(?:oat|pat)_/);
 });
 
-test("audit checkout rejects unauthorized or malformed submissions before Stripe", async () => {
+test("audit checkout rejects unauthorized or malformed submissions before Polar", async () => {
   const missingAuthorization = new URLSearchParams({
     plan: "beta",
     email: "owner@example.com",
@@ -158,4 +159,35 @@ test("audit checkout rejects unauthorized or malformed submissions before Stripe
   assert.equal(malformedResponse.status, 400);
   assert.match((await unauthorizedResponse.json()).error, /authorization/i);
   assert.match((await malformedResponse.json()).error, /github\.com/i);
+});
+
+test("authorized audit intake redirects to the server-mapped Polar checkout", async () => {
+  const response = await render("/api/security-audit/checkout", {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      plan: "beta",
+      email: "owner@example.com",
+      company: "Example Security",
+      repository: "https://github.com/example/project",
+      policyUrl: "https://example.com/security-policy",
+      scopeNotes: "Default branch only",
+      authorization: "confirmed",
+      terms: "accepted",
+    }),
+    redirect: "manual",
+  });
+
+  assert.equal(response.status, 303);
+  const checkout = new URL(response.headers.get("location"));
+  assert.equal(checkout.origin, "https://buy.polar.sh");
+  assert.equal(checkout.searchParams.get("product_id"), "e1398921-b9ff-4535-80bf-6e9621c2ea52");
+  assert.equal(checkout.searchParams.get("customer_email"), "owner@example.com");
+  assert.equal(
+    checkout.searchParams.get("custom_field_data.github-repository"),
+    "https://github.com/example/project",
+  );
+  assert.equal(checkout.searchParams.get("utm_content"), "authorization-confirmed");
+  assert.match(checkout.searchParams.get("reference_id"), /^[0-9a-f-]{36}$/i);
+  assert.doesNotMatch(checkout.href, /POLAR_WEBHOOK_SECRET|polar_(?:oat|pat)_/i);
 });

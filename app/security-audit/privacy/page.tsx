@@ -22,16 +22,16 @@ export default function SecurityAuditPrivacyPage() {
           <p>The intake collects a business email, optional company name, GitHub repository URL, optional policy URL, selected plan, authorization confirmation and short scope notes. Do not submit source code, credentials, user records or production data in the form.</p>
 
           <h2>Payments</h2>
-          <p>Stripe processes checkout and card data under its own terms. This application receives a session identifier, payment status, amount, customer email and limited order metadata; it does not receive the full card number.</p>
+          <p>Polar acts as merchant of record and processes checkout, taxes and card data under its own terms. This application receives a checkout identifier, payment status, amount, customer email and limited order metadata; it does not receive the full card number.</p>
 
           <h2>Fulfillment</h2>
-          <p>After Stripe verifies payment, the minimum order fields may be sent to the configured private fulfillment system. Stripe event identifiers are used as idempotency keys so retries do not intentionally create duplicate work.</p>
+          <p>After Polar verifies payment, the minimum order fields may be sent to the configured private fulfillment system. Polar webhook identifiers are used as idempotency keys so retries do not intentionally create duplicate work.</p>
 
           <h2>Retention and access</h2>
           <p>Intake and audit records should be retained only for delivery, accounting, dispute handling and agreed remediation follow-up, then deleted or anonymized when no longer required. Private repository access must be least-privilege and removed after the engagement unless monitoring was purchased.</p>
 
           <h2>Public site analytics</h2>
-          <p>The public site uses cookie-free route-level analytics. Query strings and URL fragments are removed from analytics events. Repository form fields and Stripe checkout metadata are not sent as analytics properties.</p>
+          <p>The public site uses cookie-free route-level analytics. Query strings and URL fragments are removed from analytics events. Repository form fields and Polar checkout metadata are not sent as analytics properties.</p>
 
           <p className="audit-legal-nav"><Link href="/security-audit">← Back to security audit</Link></p>
         </article>
