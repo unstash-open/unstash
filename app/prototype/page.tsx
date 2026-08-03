@@ -62,7 +62,9 @@ export default function PrototypePage() {
     <div className="prototype-page">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
       />
       <SiteHeader />
       <main className="prototype-shell shell">

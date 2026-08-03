@@ -74,6 +74,7 @@ function isVaultItem(value: unknown): value is VaultItem {
   return (
     typeof item.id === "string" &&
     typeof item.url === "string" &&
+    normaliseCaptureUrl(item.url) !== null &&
     typeof item.title === "string" &&
     typeof item.action === "string" &&
     actions.has(item.action as ActionType) &&
@@ -178,16 +179,13 @@ export function VaultPrototype({ guided = false }: { guided?: boolean }) {
     event.preventDefault();
     if (!url.trim()) return;
 
-    try {
-      new URL(url);
-    } catch {
-      return;
-    }
+    const safeUrl = normaliseCaptureUrl(url);
+    if (!safeUrl) return;
 
     const next: VaultItem = {
       id: crypto.randomUUID(),
-      url: url.trim(),
-      title: title.trim() || deriveTitle(url),
+      url: safeUrl,
+      title: title.trim() || deriveTitle(safeUrl),
       action,
       createdAt: new Date().toISOString(),
       completed: false,

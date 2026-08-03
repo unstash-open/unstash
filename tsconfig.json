@@ -34,6 +34,7 @@
     "node_modules",
     "build/**/*",
     "db/**/*",
+    "supabase/functions/**/*",
     "worker/**/*",
     "vite.config.ts"
   ]

@@ -18,6 +18,14 @@ drafts live in [docs/OPERATIONS.md](./docs/OPERATIONS.md),
 Extension permissions, limits and the release checksum are recorded in
 [docs/EXTENSION_0.1.md](./docs/EXTENSION_0.1.md).
 
+The repository also contains a separately branded LeadHarbor Studio repository
+security review at `/security-audit`. It has its own navigation, methodology,
+sample report and authorization boundary; it is not part of the Unstash consumer
+product. Checkout and fulfillment operations are documented in
+[docs/SECURITY_AUDIT_REVENUE.md](./docs/SECURITY_AUDIT_REVENUE.md),
+[docs/SECURITY_AUDIT_DELIVERY.md](./docs/SECURITY_AUDIT_DELIVERY.md) and
+[docs/SECURITY_AUDIT_SALES.md](./docs/SECURITY_AUDIT_SALES.md).
+
 The [29-second demo](https://unstash-open.vercel.app/unstash-demo.mp4) uses
 AI-generated title art and a natural conversational AI voice over real product
 screens. No camera, microphone or personal account footage is used.
@@ -41,7 +49,7 @@ screens. No camera, microphone or personal account footage is used.
 
 ## Development
 
-Requires Node.js `>=22.13.0`.
+Requires Node.js `24.x`.
 
 ```bash
 npm install
@@ -51,8 +59,9 @@ npm test
 npm run package:extension
 ```
 
-The application uses Next-compatible React through vinext and targets a
-Cloudflare Worker runtime.
+The production deployment uses the standard Next.js build. Optional
+`dev:worker` and `build:worker` scripts retain the Cloudflare Worker preview
+used by the deterministic route tests.
 
 ## Privacy
 
