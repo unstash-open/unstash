@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PROJECT } from "../../lib/project";
 import { SECURITY_AUDIT_PLANS } from "../../lib/security-audit";
-import { SiteFooter } from "../components/SiteFooter";
-import { SiteHeader } from "../components/SiteHeader";
+import { SECURITY_AUDIT_BUSINESS } from "../../lib/security-audit-business";
+import { AuditFooter } from "./components/AuditFooter";
+import { AuditHeader } from "./components/AuditHeader";
 
 export const metadata: Metadata = {
-  title: "Human-verified repository security audit",
+  title: { absolute: "Repository security review · LeadHarbor Studio" },
   description:
     "A paid, authorization-gated GitHub repository security review with human validation, remediation guidance and an optional monthly monitor.",
   alternates: { canonical: `${PROJECT.siteUrl}/security-audit` },
   openGraph: {
-    title: "Repository security review · Unstash",
+    title: "Repository security review · LeadHarbor Studio",
     description:
       "Turn scanner noise into confirmed, reproducible findings before the next release.",
     url: `${PROJECT.siteUrl}/security-audit`,
@@ -38,7 +39,11 @@ export default function SecurityAuditPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Human-verified GitHub repository security audit",
-    provider: { "@type": "Organization", name: PROJECT.name, url: PROJECT.siteUrl },
+    provider: {
+      "@type": "Organization",
+      name: SECURITY_AUDIT_BUSINESS.name,
+      url: SECURITY_AUDIT_BUSINESS.siteUrl,
+    },
     areaServed: "Worldwide",
     serviceType: "Application security review",
     url: `${PROJECT.siteUrl}/security-audit`,
@@ -53,7 +58,7 @@ export default function SecurityAuditPage() {
 
   return (
     <>
-      <SiteHeader />
+      <AuditHeader />
       <main className="audit-main">
         <section className="audit-hero shell">
           <div className="audit-hero-copy">
@@ -216,6 +221,11 @@ export default function SecurityAuditPage() {
               <p>We stop before analysis and refund the payment. Payment itself never expands the authorized testing scope.</p>
             </details>
           </div>
+          <p className="audit-legal-nav">
+            <Link href="/security-audit/methodology">Read the full methodology</Link>
+            {" · "}
+            <Link href="/security-audit/sample-report">Inspect a sample finding</Link>
+          </p>
         </section>
 
         <section className="audit-final-cta">
@@ -230,11 +240,13 @@ export default function SecurityAuditPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <AuditFooter />
       <script
         id="security-audit-service-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c"),
+        }}
       />
     </>
   );

@@ -67,9 +67,24 @@ payment status, amount and currency. It never contains card data or Polar
 secrets. The Standard Webhooks event ID is sent as `Idempotency-Key`; the
 receiver must safely ignore duplicate event IDs.
 
-Without a private fulfillment URL, checkout continues to work and paid orders
-remain visible in Polar. Operations must monitor the Polar order dashboard and
-connect an alerting queue before buying paid traffic.
+The included Supabase implementation is documented in
+`docs/SECURITY_AUDIT_DELIVERY.md`. It stores orders in a private, non-Data-API
+schema and verifies the application bearer secret before touching the database.
+
+The fulfillment URL and its bearer secret are a production readiness requirement.
+If either is absent or invalid, the signed webhook returns a retryable non-2xx
+response rather than silently acknowledging an order that was not queued. The
+receiver must durably deduplicate `Idempotency-Key` values.
+
+Readiness is exposed without secret values at:
+
+```text
+GET https://unstash-open.vercel.app/api/security-audit/health
+```
+
+Do not buy traffic until that endpoint returns HTTP 200 with all checks true. The
+health route performs an authenticated GET against the queue, so a configured but
+unreachable receiver remains not ready.
 
 ## Verification
 
@@ -115,6 +130,10 @@ payment according to `/security-audit/terms`.
 - Track qualified visits, completed intakes, paid checkouts, delivery hours,
   confirmed findings, retest completion and managed-plan conversions.
 - Never advertise a guaranteed vulnerability count or bounty payout.
+
+The narrow initial customer profile, outreach cadence, unit-economics guardrails
+and weekly scorecard are in `docs/SECURITY_AUDIT_SALES.md`. The order-to-deletion
+runbook is in `docs/SECURITY_AUDIT_DELIVERY.md`.
 
 GitHub Marketplace remains a later distribution channel. Direct Polar checkout
 is the initial commercial path.

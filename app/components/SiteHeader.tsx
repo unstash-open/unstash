@@ -12,7 +12,6 @@ export function SiteHeader() {
           <Link href="/#demo">Demo</Link>
           <Link href="/extension">Extension</Link>
           <Link href="/beta">5-min Beta</Link>
-          <Link href="/security-audit">Security audit</Link>
           <Link href="/transparency">Transparency</Link>
           <Link className="nav-cta" href="/beta">Run the test</Link>
         </nav>

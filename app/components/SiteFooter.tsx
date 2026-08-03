@@ -22,7 +22,6 @@ export function SiteFooter() {
           <Link href="/beta">5-minute beta</Link>
           <Link href="/prototype">Prototype</Link>
           <Link href="/extension">Extension 0.1</Link>
-          <Link href="/security-audit">Security audit</Link>
           <a href={PROJECT.releaseUrl} target="_blank" rel="noreferrer">
             Release ↗
           </a>

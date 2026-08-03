@@ -359,24 +359,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="revenue-service-section shell">
-          <div>
-            <span className="status-pill">NEW · PAID SECURITY SERVICE</span>
-            <div className="section-kicker">07 · REPOSITORY REVIEW</div>
-            <h2>Ship with fewer security unknowns.</h2>
-            <p>
-              A fixed-scope, human-verified GitHub repository audit: complete
-              inventory, local reproduction, remediation direction and no
-              production exploitation. Paid engagements start at $490.
-            </p>
-          </div>
-          <Link className="button button-dark" href="/security-audit">
-            Review a repository <span aria-hidden="true">→</span>
-          </Link>
-        </section>
-
         <section className="faq-section shell" id="faq">
-          <div className="section-kicker">08 · STRAIGHT ANSWERS</div>
+          <div className="section-kicker">07 · STRAIGHT ANSWERS</div>
           <div className="faq-layout">
             <h2>Before you contribute.</h2>
             <div className="faq-list">

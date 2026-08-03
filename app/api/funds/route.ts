@@ -1,4 +1,9 @@
 import { PROJECT } from "../../../lib/project";
+import {
+  isOfficialEthereumUsdtTransfer,
+  isOfficialTronUsdtTransfer,
+  sumMicroUsdt,
+} from "../../../lib/funds";
 
 export const runtime = "nodejs";
 
@@ -89,22 +94,12 @@ async function fetchTronTotal() {
     if (!fingerprint || pageTransfers.length < 200) break;
   }
 
-  const valid = transfers.filter((transfer) => {
-    const contractMatches =
-      transfer.token_info?.address?.toLowerCase() ===
-      PROJECT.contracts.trc20Usdt.toLowerCase();
-    const tokenMatches = transfer.token_info?.symbol === "USDT";
-    const recipientMatches = transfer.to === PROJECT.wallets.trc20;
-    return recipientMatches && (contractMatches || tokenMatches);
-  });
-
-  const microUsdt = valid.reduce((sum, transfer) => {
-    if (!/^\d+$/.test(transfer.value)) return sum;
-    return sum + BigInt(transfer.value);
-  }, 0n);
+  const valid = transfers.filter((transfer) =>
+    isOfficialTronUsdtTransfer(transfer, PROJECT),
+  );
 
   return {
-    amount: Number(microUsdt) / 1_000_000,
+    amount: sumMicroUsdt(valid.map((transfer) => transfer.value)),
     transactionCount: valid.length,
   };
 }
@@ -142,27 +137,12 @@ async function fetchEthereumTotal() {
     if (!nextPage || reachedLaunch) break;
   }
 
-  const valid = transfers.filter((transfer) => {
-    const tokenMatches =
-      transfer.token?.address_hash?.toLowerCase() ===
-        PROJECT.contracts.erc20Usdt.toLowerCase() ||
-      transfer.token?.symbol === "USDT";
-    const recipientMatches =
-      transfer.to?.hash?.toLowerCase() === PROJECT.wallets.erc20.toLowerCase();
-    const afterLaunch =
-      transfer.block_number >= Number(BigInt(PROJECT.ethereumLaunchBlock)) &&
-      Date.parse(transfer.timestamp) >= Date.parse(PROJECT.launchAt);
-    return recipientMatches && tokenMatches && afterLaunch;
-  });
-
-  const microUsdt = valid.reduce((sum, transfer) => {
-    const value = transfer.total?.value;
-    if (!value || !/^\d+$/.test(value)) return sum;
-    return sum + BigInt(value);
-  }, 0n);
+  const valid = transfers.filter((transfer) =>
+    isOfficialEthereumUsdtTransfer(transfer, PROJECT),
+  );
 
   return {
-    amount: Number(microUsdt) / 1_000_000,
+    amount: sumMicroUsdt(valid.map((transfer) => transfer.total?.value)),
     transactionCount: new Set(valid.map((transfer) => transfer.transaction_hash)).size,
   };
 }

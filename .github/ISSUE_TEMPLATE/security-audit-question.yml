@@ -1,0 +1,28 @@
+name: Security audit pre-sales question
+description: Ask a public, non-sensitive question about the repository review service.
+title: "[Security review question] "
+labels:
+  - security-audit
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include private repository names, credentials, source code, vulnerability details or personal data. Sensitive scope is collected separately after payment verification.
+  - type: input
+    id: question
+    attributes:
+      label: Question
+      description: What do you need to know before choosing a plan?
+    validations:
+      required: true
+  - type: dropdown
+    id: team-size
+    attributes:
+      label: Engineering team size
+      options:
+        - 1–5
+        - 6–20
+        - 21–50
+        - 51+
+    validations:
+      required: true

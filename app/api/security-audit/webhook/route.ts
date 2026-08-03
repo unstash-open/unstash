@@ -1,7 +1,27 @@
 import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
 import { getSecurityAuditPlanIdForPolarProduct } from "../../../../lib/polar";
+import {
+  FulfillmentConfigurationError,
+  getFulfillmentConfiguration,
+} from "../../../../lib/security-audit-fulfillment";
+import {
+  readBoundedRequestBody,
+  RequestBodyTooLargeError,
+} from "../../../../lib/request-body";
 
 export const runtime = "nodejs";
+
+const MAX_WEBHOOK_BODY_BYTES = 1_048_576;
+
+function jsonNoStore(body: unknown, status = 200) {
+  return Response.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
+}
 
 type FulfillmentPayload = {
   eventId: string;
@@ -32,30 +52,18 @@ function fieldString(value: unknown) {
 }
 
 async function notifyFulfillment(payload: FulfillmentPayload) {
-  const target = process.env.SECURITY_AUDIT_FULFILLMENT_WEBHOOK_URL?.trim();
-  if (!target) {
-    console.warn("Paid security audit is visible in Polar, but fulfillment webhook is not configured", {
-      eventId: payload.eventId,
-      polarOrderId: payload.polarOrderId,
-      plan: payload.plan,
-    });
-    return;
-  }
-
-  const url = new URL(target);
-  if (url.protocol !== "https:" && url.hostname !== "localhost") {
-    throw new Error("Fulfillment webhook must use HTTPS.");
-  }
-
-  const secret = process.env.SECURITY_AUDIT_FULFILLMENT_WEBHOOK_SECRET?.trim();
+  const { url, secret } = getFulfillmentConfiguration();
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(secret ? { Authorization: `Bearer ${secret}` } : {}),
+      Authorization: `Bearer ${secret}`,
       "Idempotency-Key": payload.eventId,
     },
     body: JSON.stringify(payload),
+    cache: "no-store",
+    redirect: "error",
+    signal: AbortSignal.timeout(8_000),
   });
 
   if (!response.ok) throw new Error(`Fulfillment webhook responded with ${response.status}.`);
@@ -64,16 +72,30 @@ async function notifyFulfillment(payload: FulfillmentPayload) {
 export async function POST(request: Request) {
   const webhookSecret = process.env.POLAR_WEBHOOK_SECRET?.trim();
   if (!webhookSecret) {
-    return Response.json({ error: "Polar webhook is not configured." }, { status: 503 });
+    return jsonNoStore({ error: "Polar webhook is not configured." }, 503);
   }
 
-  const rawBody = await request.text();
+  const contentLength = Number(request.headers.get("content-length") ?? "0");
+  if (Number.isFinite(contentLength) && contentLength > MAX_WEBHOOK_BODY_BYTES) {
+    return jsonNoStore({ error: "Webhook payload is too large." }, 413);
+  }
+
+  let rawBody: string;
+  try {
+    const body = await readBoundedRequestBody(request, MAX_WEBHOOK_BODY_BYTES);
+    rawBody = new TextDecoder("utf-8", { fatal: true }).decode(body);
+  } catch (error) {
+    if (error instanceof RequestBodyTooLargeError) {
+      return jsonNoStore({ error: "Webhook payload is too large." }, 413);
+    }
+    return jsonNoStore({ error: "Invalid webhook encoding." }, 400);
+  }
   let event: ReturnType<typeof validateEvent>;
   try {
     event = validateEvent(rawBody, Object.fromEntries(request.headers.entries()), webhookSecret);
   } catch (error) {
     const status = error instanceof WebhookVerificationError ? 403 : 400;
-    return Response.json({ error: "Invalid Polar webhook." }, { status });
+    return jsonNoStore({ error: "Invalid Polar webhook." }, status);
   }
 
   const eventId = request.headers.get("webhook-id")
@@ -86,7 +108,7 @@ export async function POST(request: Request) {
         ? getSecurityAuditPlanIdForPolarProduct(order.productId)
         : undefined;
       if (!planId || !order.productId) {
-        return Response.json({ received: true, ignored: true });
+        return jsonNoStore({ received: true, ignored: true });
       }
 
       await notifyFulfillment({
@@ -111,10 +133,16 @@ export async function POST(request: Request) {
         amountTotal: order.totalAmount,
         currency: order.currency,
       });
+      console.info("Security audit order event queued", {
+        event: event.type,
+        eventId,
+        plan: planId,
+        polarOrderId: order.id,
+      });
     } else if (event.type === "subscription.revoked" || event.type === "subscription.past_due") {
       const subscription = event.data;
       const planId = getSecurityAuditPlanIdForPolarProduct(subscription.productId);
-      if (!planId) return Response.json({ received: true, ignored: true });
+      if (!planId) return jsonNoStore({ received: true, ignored: true });
 
       await notifyFulfillment({
         eventId,
@@ -137,17 +165,21 @@ export async function POST(request: Request) {
         amountTotal: subscription.amount,
         currency: subscription.currency,
       });
+      console.info("Security audit subscription event queued", {
+        event: event.type,
+        eventId,
+        plan: planId,
+        polarSubscriptionId: subscription.id,
+      });
     }
   } catch (error) {
     console.error("Security audit fulfillment notification failed", {
       eventId,
-      error: error instanceof Error ? error.message : "Unknown error",
+      error: error instanceof Error ? error.name : "UnknownError",
     });
-    return Response.json({ error: "Fulfillment notification failed." }, { status: 502 });
+    const status = error instanceof FulfillmentConfigurationError ? 503 : 502;
+    return jsonNoStore({ error: "Fulfillment notification failed." }, status);
   }
 
-  return Response.json(
-    { received: true },
-    { headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } },
-  );
+  return jsonNoStore({ received: true });
 }

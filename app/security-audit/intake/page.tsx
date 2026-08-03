@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSecurityAuditPlan, SECURITY_AUDIT_PLANS } from "../../../lib/security-audit";
-import { SiteFooter } from "../../components/SiteFooter";
-import { SiteHeader } from "../../components/SiteHeader";
+import { AuditFooter } from "../components/AuditFooter";
+import { AuditHeader } from "../components/AuditHeader";
+import { TrackedAuditForm } from "../components/TrackedAuditForm";
 
 export const metadata: Metadata = {
   title: "Start a repository security audit",
@@ -28,7 +29,7 @@ export default async function SecurityAuditIntakePage({ searchParams }: IntakePa
 
   return (
     <>
-      <SiteHeader />
+      <AuditHeader />
       <main className="audit-intake-main">
         <section className="audit-intake shell">
           <div className="audit-intake-copy">
@@ -51,7 +52,7 @@ export default async function SecurityAuditIntakePage({ searchParams }: IntakePa
             </Link>
           </div>
 
-          <form className="audit-intake-form" action="/api/security-audit/checkout" method="post">
+          <TrackedAuditForm>
             {statusMessage ? <p className="audit-form-status" role="status">{statusMessage}</p> : null}
             <div className="form-field">
               <label htmlFor="plan">Plan</label>
@@ -87,27 +88,10 @@ export default async function SecurityAuditIntakePage({ searchParams }: IntakePa
               />
               <small>Private repositories are connected only after payment and scope verification.</small>
             </div>
-            <div className="form-field">
-              <label htmlFor="policyUrl">Bug bounty or authorization policy URL <span>optional</span></label>
-              <input
-                id="policyUrl"
-                name="policyUrl"
-                type="url"
-                inputMode="url"
-                placeholder="https://example.com/security"
-                maxLength={500}
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="scopeNotes">Scope notes <span>optional</span></label>
-              <textarea
-                id="scopeNotes"
-                name="scopeNotes"
-                rows={4}
-                maxLength={500}
-                placeholder="Deployment model, languages, deadline, explicitly excluded components…"
-              />
-            </div>
+            <p className="audit-form-status">
+              Detailed scope, private access and policy documents are collected only
+              after payment verification, outside the checkout URL.
+            </p>
             <div className="audit-honeypot" aria-hidden="true">
               <label htmlFor="website">Website</label>
               <input id="website" name="website" tabIndex={-1} autoComplete="off" />
@@ -130,10 +114,10 @@ export default async function SecurityAuditIntakePage({ searchParams }: IntakePa
               Payment is processed by Polar as merchant of record. We never receive your card number.
               See the <Link href="/security-audit/privacy">privacy notice</Link>.
             </p>
-          </form>
+          </TrackedAuditForm>
         </section>
       </main>
-      <SiteFooter />
+      <AuditFooter />
     </>
   );
 }

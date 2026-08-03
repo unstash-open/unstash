@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "../../components/SiteFooter";
-import { SiteHeader } from "../../components/SiteHeader";
+import { AuditFooter } from "../components/AuditFooter";
+import { AuditHeader } from "../components/AuditHeader";
 
 export const metadata: Metadata = {
   title: "Security audit checkout complete",
@@ -16,7 +16,7 @@ export default async function SecurityAuditSuccessPage({ searchParams }: Success
   const { checkout_id: checkoutId } = await searchParams;
   return (
     <>
-      <SiteHeader />
+      <AuditHeader />
       <main className="audit-result-main">
         <section className="audit-result-card shell">
           <span className="audit-result-mark" aria-hidden="true">✓</span>
@@ -38,7 +38,7 @@ export default async function SecurityAuditSuccessPage({ searchParams }: Success
           </Link>
         </section>
       </main>
-      <SiteFooter />
+      <AuditFooter />
     </>
   );
 }
